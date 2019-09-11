@@ -26,10 +26,19 @@ export interface StringMap<T> {
 }
 
 /**
- * A parameter to log
+ * A parameter's value to log.
  */
 export interface ParameterValue {
+  /**
+   * A possible type for this value.
+   * This will be used by [insights.io](https://insights.io)'s web interface to display certain parameters in specific ways.
+   *
+   * You should not set the value manually, instead, use provided parameters functions in `parameters`.
+   */
   type?: string
+  /**
+   * The actual value.
+   */
   value: string
 }
 
@@ -40,6 +49,8 @@ export interface TrackEventPayload {
   /**
    * A unique identifier for this event.
    * This should be formatted as `pascal-case`.
+   *
+   * [insights.io](https://insights.io)'s web interface properly format these parameter names.
    */
   id: string
 
@@ -47,10 +58,45 @@ export interface TrackEventPayload {
    * The parameters to log along this event.
    * Each key in the map is the parameter name, and the value it's value.
    *
+   * [insights.io](https://insights.io) will aggregate the counts for each value and display them under each event.
+   *
    * e.g.
    * ```js
+   * import { track, parameters } from "insights-js"
+   *
+   * // user signed up with their email/password
    * track({
-   *   id: "user-subscribed",
+   *   id: "user-signed-up",
+   *   parameters: {
+   *     provider: "email",
+   *   }
+   * })
+   *
+   * // user signed up with facebook
+   * track({
+   *   id: "user-signed-up",
+   *   parameters: {
+   *     provider: "facebook"
+   *   }
+   * })
+   *
+   * // a product was sold
+   * track({
+   *   id: "product-sale",
+   *   parameters: {
+   *     product: product.name,
+   *     currency: customer.currency,
+   *   }
+   * })
+   *
+   * // a page was opened
+   * track({
+   *   id: "open-page",
+   *   parameters: {
+   *     path: parameters.path(),
+   *     screenType: parameters.screenType(),
+   *     referrer: parameters.referrer()
+   *   }
    * })
    * ```
    */
@@ -64,10 +110,18 @@ export interface TrackEventPayload {
   unique?: boolean
 
   /**
-   * When tracking values that can be undone, this
+   * Certain events last through time and may be undone or cancelled after they have been logged.
+   * For example, when tracking subscription to services or people.
    *
+   * For these events, it is very useful to be able to know:
    *
-   * e.g.
+   * - When an event is tracked
+   * - When an event is marked as cancelled
+   * - The current number of active (`tracked - cancelled`) events
+   *
+   * When this flag is set to `true`, the given event is marked as cancelled.
+   *
+   * e.g:
    * ```js
    * // A user just subscribed!
    * track({
@@ -81,7 +135,7 @@ export interface TrackEventPayload {
    * track({
    *   id: "user-subscribed",
    *   parameters: {
-   *     plan: "Premium"
+   *     plan: "Premium",
    *   },
    *   remove: true
    * })

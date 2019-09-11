@@ -13,21 +13,21 @@ export function locale() {
 
 function getScreenType() {
   const width = window.innerWidth
-  if (width <= 320) return "xs"
-  if (width <= 576) return "s"
-  if (width <= 992) return "m"
-  if (width <= 1440) return "l"
+  if (width <= 414) return "xs"
+  if (width <= 800) return "s"
+  if (width <= 1200) return "m"
+  if (width <= 1600) return "l"
   return "xl"
 }
 
 /**
  * Logs the screen type of the current user, based on window size:
  *
- * - width <= 320: xs
- * - width <= 576: s
- * - width <= 992: m
- * - width <= 1440: l
- * - width > 1440: xl
+ * - width <= 414: xs -> phone
+ * - width <= 800: s -> tablet
+ * - width <= 1200: m -> small laptop
+ * - width <= 1600: l -> large laptop
+ * - width > 1440: xl -> large desktop
  */
 export function screenType() {
   return { type: "screen-type", value: getScreenType() }
@@ -42,7 +42,7 @@ export function referrer() {
 
 /**
  * Logs the current path within the application.
- * By default, does not log the `locaiton.hash` nor the `location.search`
+ * By default, does not log the `location.hash` nor the `location.search`
  *
  * @param hash `true` to log the hash, `false` by default
  * @param search `true` to log the hash, `false` by default
