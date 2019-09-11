@@ -19,7 +19,8 @@
     "prebuild": "rimraf dist",
     "prepublish": "npm run build",
     "build": "rollup -c",
-    "start": "rollup -c -w"
+    "start": "rollup -c -w",
+    "doc": "rimraf docs && typedoc --out docs/ src/ --excludeNotExported --tsConfig ./tsconfig.json --theme markdown"
   },
   "prettier": {
     "semi": false,
@@ -27,10 +28,11 @@
   },
   "dependencies": {
     "isomorphic-unfetch": "3.0.0",
-    "unfetch": "^4.1.0"
+    "unfetch": "4.1.0"
   },
   "devDependencies": {
     "@types/node": "12.7.4",
+    "@types/node-fetch": "2.5.0",
     "prettier": "1.18.2",
     "rimraf": "3.0.0",
     "rollup": "1.20.3",
@@ -39,6 +41,8 @@
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-sourcemaps": "0.4.2",
     "rollup-plugin-typescript2": "0.24.0",
+    "typedoc": "^0.15.0",
+    "typedoc-plugin-markdown": "^2.1.11",
     "typescript": "3.6.2"
   }
 }
