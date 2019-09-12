@@ -22,7 +22,7 @@
 
 • **apps**: *[App](../classes/_app_.app.md)[]* =  []
 
-*Defined in [index.ts:7](https://github.com/getinsights/insights-js/blob/d0bb780/src/index.ts#L7)*
+*Defined in [index.ts:8](https://github.com/getinsights/insights-js/blob/f3c18cb/src/index.ts#L8)*
 
 ## Functions
 
@@ -30,7 +30,7 @@
 
 ▸ **init**(`projectId`: string, `options?`: [AppOptions](../interfaces/_app_.appoptions.md)): *[App](../classes/_app_.app.md)*
 
-*Defined in [index.ts:17](https://github.com/getinsights/insights-js/blob/d0bb780/src/index.ts#L17)*
+*Defined in [index.ts:18](https://github.com/getinsights/insights-js/blob/f3c18cb/src/index.ts#L18)*
 
 Initialize a default app for the given project with the given options.
 
@@ -51,7 +51,7 @@ ___
 
 ▸ **track**(`event`: [TrackEventPayload](../interfaces/_app_.trackeventpayload.md)): *void*
 
-*Defined in [index.ts:31](https://github.com/getinsights/insights-js/blob/d0bb780/src/index.ts#L31)*
+*Defined in [index.ts:32](https://github.com/getinsights/insights-js/blob/f3c18cb/src/index.ts#L32)*
 
 Tracks an event using the default app, you must call `init()` before calling this.
 
@@ -69,7 +69,7 @@ ___
 
 ▸ **trackPages**(`options?`: [TrackPagesOptions](../interfaces/_app_.trackpagesoptions.md)): *[TrackPagesResult](../interfaces/_app_.trackpagesresult.md)*
 
-*Defined in [index.ts:55](https://github.com/getinsights/insights-js/blob/d0bb780/src/index.ts#L55)*
+*Defined in [index.ts:56](https://github.com/getinsights/insights-js/blob/f3c18cb/src/index.ts#L56)*
 
 Tracks page views using the default app.
 This method checks if the URL changed every so often and tracks new pages accordingly.

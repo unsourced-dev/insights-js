@@ -23,7 +23,7 @@ A parameter's value to log.
 
 • **type**? : *undefined | string*
 
-*Defined in [App.ts:45](https://github.com/getinsights/insights-js/blob/d0bb780/src/App.ts#L45)*
+*Defined in [App.ts:46](https://github.com/getinsights/insights-js/blob/f3c18cb/src/App.ts#L46)*
 
 A possible type for this value.
 This will be used by [insights.io](https://insights.io)'s web interface to display certain parameters in specific ways.
@@ -36,6 +36,6 @@ ___
 
 • **value**: *string*
 
-*Defined in [App.ts:49](https://github.com/getinsights/insights-js/blob/d0bb780/src/App.ts#L49)*
+*Defined in [App.ts:50](https://github.com/getinsights/insights-js/blob/f3c18cb/src/App.ts#L50)*
 
 The actual value.

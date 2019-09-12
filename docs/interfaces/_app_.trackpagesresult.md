@@ -22,7 +22,7 @@ The object returned by `App.trackPages()`, used to stop tracking pages.
 
 ▸ **stop**(): *void*
 
-*Defined in [App.ts:183](https://github.com/getinsights/insights-js/blob/d0bb780/src/App.ts#L183)*
+*Defined in [App.ts:184](https://github.com/getinsights/insights-js/blob/f3c18cb/src/App.ts#L184)*
 
 Stops the tracking of pages.
 

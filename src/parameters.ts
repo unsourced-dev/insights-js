@@ -13,21 +13,21 @@ export function locale() {
 
 function getScreenType() {
   const width = window.innerWidth
-  if (width <= 414) return "xs"
-  if (width <= 800) return "s"
-  if (width <= 1200) return "m"
-  if (width <= 1600) return "l"
-  return "xl"
+  if (width <= 414) return "XS"
+  if (width <= 800) return "S"
+  if (width <= 1200) return "M"
+  if (width <= 1600) return "L"
+  return "XL"
 }
 
 /**
  * Logs the screen type of the current user, based on window size:
  *
- * - width <= 414: xs -> phone
- * - width <= 800: s -> tablet
- * - width <= 1200: m -> small laptop
- * - width <= 1600: l -> large laptop
- * - width > 1440: xl -> large desktop
+ * - width <= 414: XS -> phone
+ * - width <= 800: S -> tablet
+ * - width <= 1200: M -> small laptop
+ * - width <= 1600: L -> large laptop
+ * - width > 1440: XL -> large desktop
  */
 export function screenType() {
   if (!isInBrowser()) {

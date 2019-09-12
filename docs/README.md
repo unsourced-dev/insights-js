@@ -189,6 +189,8 @@ app2.track({
 
 ## API
 
+See the detailed API documentation [in the docs folder](./docs/README.md).
+
 ### `init(projectId, options)`
 
 ```ts
@@ -321,11 +323,11 @@ Gets the `locale` of the current user, for example: `en-US`, `pt-BR` or `fr-FR`.
 
 Gets the type of screen the user is currently on, possible return values:
 
-- `"xs"` if `screen width <= 414px`: Mobile phone
-- `"s"` if `screen width <= 800px`: Tablet
-- `"m"` if `screen width <= 1200px`: Small laptop
-- `"l"` if `screen width <= 1600px`: Large laptop / small desktop
-- `"xl"` if `screen width > 1600px`: Large desktop
+- `"XS"` if `screen width <= 414px`: Mobile phone
+- `"S"` if `screen width <= 800px`: Tablet
+- `"M"` if `screen width <= 1200px`: Small laptop
+- `"L"` if `screen width <= 1600px`: Large laptop / small desktop
+- `"XL"` if `screen width > 1600px`: Large desktop
 
 #### `parameters.referrer()`
 
