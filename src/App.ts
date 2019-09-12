@@ -307,10 +307,8 @@ export class App {
       path,
       referrer: parameters.referrer(),
       locale: parameters.locale(),
-      screenType: parameters.screenType()
-    }
-    if (unique && count === 1) {
-      params.unique = "Yes"
+      screenType: parameters.screenType(),
+      unique: unique && count === 1 ? "Yes" : "No"
     }
     this.track({
       id: "page-views",
