@@ -313,7 +313,7 @@ export class App {
       params.unique = "Yes"
     }
     this.track({
-      id: "page-view",
+      id: "page-views",
       parameters: params
     })
   }
