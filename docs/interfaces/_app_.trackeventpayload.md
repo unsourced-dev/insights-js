@@ -25,7 +25,7 @@ The payload to call
 
 • **id**: *string*
 
-*Defined in [App.ts:63](https://github.com/getinsights/insights-js/blob/f3c18cb/src/App.ts#L63)*
+*Defined in [App.ts:63](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L63)*
 
 A unique identifier for this event.
 This should be formatted as `pascal-case`.
@@ -38,7 +38,7 @@ ___
 
 • **parameters**? : *[StringMap](_app_.stringmap.md)‹string | [ParameterValue](_app_.parametervalue.md)›*
 
-*Defined in [App.ts:111](https://github.com/getinsights/insights-js/blob/f3c18cb/src/App.ts#L111)*
+*Defined in [App.ts:111](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L111)*
 
 The parameters to log along this event.
 Each key in the map is the parameter name, and the value it's value.
@@ -91,7 +91,7 @@ ___
 
 • **remove**? : *undefined | false | true*
 
-*Defined in [App.ts:152](https://github.com/getinsights/insights-js/blob/f3c18cb/src/App.ts#L152)*
+*Defined in [App.ts:152](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L152)*
 
 Certain events last through time and may be undone or cancelled after they have been logged.
 For example, when tracking subscription to services or people.
@@ -130,7 +130,7 @@ ___
 
 • **unique**? : *undefined | false | true*
 
-*Defined in [App.ts:118](https://github.com/getinsights/insights-js/blob/f3c18cb/src/App.ts#L118)*
+*Defined in [App.ts:118](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L118)*
 
 When true, check if a similar event (i.e. same id & same parameters),
 has already been logged **with the unique flag** in this session.

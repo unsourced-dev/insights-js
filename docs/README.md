@@ -152,7 +152,26 @@ Here is the result in the dashboard:
 
 ### Tracking page views
 
-TODO
+`insights-js` provides an automatic way of collecting page views, just call the `trackPages()` function:
+
+```ts
+trackPages()
+```
+
+This function tracks the current page then listen for URL changes and track any subsequent page views.
+You may configure its behaviour by passing an options object.
+
+**Important note on bounce rate and unique views:**
+
+This method does not store any cookie or local storage, it expects that you use a client-side router.
+e.g. `react-router`, `nextjs`'s router, etc...
+The bounce rate and unique views will not be accurate if you do not use a client-side router,
+in these cases, user `trackPages(false)` to disable tracking of the bounce rate and unique page views.
+
+By default, does not track the `location.hash` nor the `location.search`.
+
+Here is the result in the dashboard:
+![Event User Subscribed in dashboard](./images/page-views.png)
 
 ### Tracking on multiple projects
 
@@ -309,7 +328,42 @@ track({
 trackPage(options?: TrackPageOptions): TrackPageResult
 ```
 
-TODO
+**arguments**
+
+`options: TrackPagesOptions`
+_Optional_
+_Default value:_ `{}`
+The options to configure the behaviour of the tracking, namely:
+
+- wether or not to track the hash portion of the URL (defaults to `false`)
+- wether or not to track the search portion of the URL (defaults to `false`)
+- wether or not to track unique page views as well (defaults to `true`)
+
+`options.hash: boolean`
+_Optional_
+_Default value:_ `false`
+`true` to also track the hash portion of the URL.
+
+`options.search: boolean`
+_Optional_
+_Default value:_ `false`
+`true` to also track the hash portion of the URL.
+
+`options.unique: boolean`
+_Optional_
+_Default value:_ `true`
+`true` to also track the number of unique page views and bounce rate.
+
+A unique page view being defined as the first page tracked in the current session (subsequent pages tracked are not unique).
+
+**Important note on bounce rate and unique views:**
+
+This method does not store any cookie or local storage, it expects that you use a client-side router.
+e.g. `react-router`, `nextjs`'s router, etc...
+The bounce rate and unique views will not be accurate if you do not use a client-side router,
+in these cases, user `trackPages(false)` to disable tracking of the bounce rate and unique page views.
+
+**returns**
 
 **arguments**
 

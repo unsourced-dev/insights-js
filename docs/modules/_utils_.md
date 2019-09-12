@@ -16,6 +16,6 @@
 
 ▸ **isInBrowser**(): *boolean*
 
-*Defined in [utils.ts:1](https://github.com/getinsights/insights-js/blob/f3c18cb/src/utils.ts#L1)*
+*Defined in [utils.ts:1](https://github.com/getinsights/insights-js/blob/61408e0/src/utils.ts#L1)*
 
 **Returns:** *boolean*
