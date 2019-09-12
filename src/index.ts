@@ -2,7 +2,7 @@ import * as parameters from "./parameters"
 import { App, AppOptions, TrackEventPayload, TrackPagesOptions, TrackPagesResult } from "./App"
 
 export { parameters }
-export { App }
+export { App, AppOptions, TrackEventPayload, TrackPagesOptions, TrackPagesResult }
 
 export const apps: App[] = []
 
