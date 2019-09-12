@@ -49,8 +49,17 @@ export function referrer() {
  */
 export function path(hash: boolean = false, search: boolean = false) {
   let value = window.location.pathname
-  if (hash) value += window.location.hash
-  if (search && !hash) value += window.location.search
+
+  const _hash = window.location.hash
+  const _search = window.location.search
+  if (hash && search) {
+    // the hash contains the search
+    value += _hash
+  } else if (hash) {
+    value += _hash.substr(0, _hash.length - _search.length)
+  } else if (search) {
+    value += _search
+  }
 
   return { type: "path", value }
 }

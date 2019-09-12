@@ -1,4 +1,5 @@
 import unfetch from "unfetch"
+import * as parameters from "./parameters"
 
 /**
  * Additional options used when tracking events
@@ -9,6 +10,12 @@ export interface AppOptions {
    * This flag should be set to `true` for production systems.
    */
   ignoreErrors?: boolean
+
+  /**
+   * When `true`, all calls are disabled.
+   * This flag is useful to disable the tracking based on the environment/URL.
+   */
+  disabled?: boolean
 }
 
 /**
@@ -145,12 +152,59 @@ export interface TrackEventPayload {
 }
 
 /**
+ * The options to use when tracking pages
+ */
+export interface TrackPagesOptions {
+  /**
+   * When `true`, tracks unique page views and the bounce rate in addition to total page views.
+   *
+   * `true` by default.
+   */
+  unique?: boolean
+  /**
+   * `true` to track the hash portion of the URL.
+   *
+   * `false` by default.
+   */
+  hash?: boolean
+  /**
+   * `true` to track the search portion of the URL.
+   *
+   * `false` by default.
+   */
+  search?: boolean
+}
+
+/**
+ * The object returned by `App.trackPages()`, used to stop tracking pages.
+ */
+export interface TrackPagesResult {
+  /** Stops the tracking of pages. */
+  stop(): void
+}
+
+interface TrackPageData {
+  unique: boolean
+  hash: boolean
+  search: boolean
+  result: TrackPagesResult
+
+  count: number
+  path: string
+}
+
+/**
  * A class that contains a `projectId` and related configuration to track events painlessly.
  */
 export class App {
   private uniques: StringMap<boolean> = {}
 
-  constructor(public projectId: string, public options: AppOptions = defaultOptions) {}
+  // variables used when tracking pages
+  private trackPageData: TrackPageData | null = null
+
+  constructor(public projectId: string, public options: AppOptions = defaultOptions) {
+    this.trackPageChange = this.trackPageChange.bind(this)
+  }
 
   /**
    * Track an occurence of the given event.
@@ -160,6 +214,9 @@ export class App {
    * @returns {Promise} a promise that resolves when the call to the API resolves.
    */
   track(event: TrackEventPayload): Promise<void> {
+    if (this.options.disabled) {
+      return Promise.resolve()
+    }
     if (event.unique) {
       const stringified = JSON.stringify(event)
       if (this.uniques[stringified]) return Promise.resolve()
@@ -178,5 +235,82 @@ export class App {
       method: "post",
       body: JSON.stringify(body)
     }).then(ignore)
+  }
+
+  /**
+   * Tracks page views. This method checks if the URL changed every so often and tracks new pages accordingly.
+   *
+   * **Important note on bounce rate and unique views:**
+   *
+   * This method does not store any cookie or local storage, it expects that you use a client-side router.
+   * e.g. `react-router`, `nextjs`'s router, etc...
+   * The bounce rate and unique views will not be accurate if you do not use a client-side router,
+   * in these cases, user `trackPages(false)` to disable tracking of the bounce rate and unique page views.
+   *
+   * By default, does not track the `location.hash` nor the `location.search`
+   *
+   * @param options The options to use for the tracking
+   *
+   * @returns An object of the form `{ stop(): void }` to stop the tracking
+   */
+  trackPages(options?: TrackPagesOptions): TrackPagesResult {
+    if (this.trackPageData) {
+      return this.trackPageData.result
+    }
+
+    // Start tracking page changes
+    const interval = setInterval(this.trackPageChange, 2000)
+
+    // Calculate the data
+    const { unique = true, hash = false, search = false } = options || {}
+    this.trackPageData = {
+      unique,
+      hash,
+      search,
+      path: parameters.path(hash, search).value,
+      count: 1,
+      result: {
+        stop() {
+          clearInterval(interval)
+        }
+      }
+    }
+
+    // Track the first/current page view
+    this.trackSinglePage()
+
+    return this.trackPageData.result
+  }
+
+  private trackPageChange() {
+    if (!this.trackPageData) return
+
+    const { hash, search } = this.trackPageData
+    const newPath = parameters.path(hash, search).value
+
+    if (newPath !== this.trackPageData.path) {
+      this.trackPageData.path = newPath
+      this.trackPageData.count++
+      this.trackSinglePage()
+    }
+  }
+
+  private trackSinglePage() {
+    if (!this.trackPageData) return
+    const { unique, path, count } = this.trackPageData
+
+    const params: any = {
+      path,
+      referrer: parameters.referrer(),
+      locale: parameters.locale(),
+      screenType: parameters.screenType()
+    }
+    if (unique && count === 1) {
+      params.unique = "Yes"
+    }
+    this.track({
+      id: "page-view",
+      parameters: params
+    })
   }
 }
