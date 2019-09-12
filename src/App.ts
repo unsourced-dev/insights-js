@@ -1,5 +1,6 @@
 import unfetch from "unfetch"
 import * as parameters from "./parameters"
+import { isInBrowser } from "./utils"
 
 /**
  * Additional options used when tracking events
@@ -214,7 +215,7 @@ export class App {
    * @returns {Promise} a promise that resolves when the call to the API resolves.
    */
   track(event: TrackEventPayload): Promise<void> {
-    if (this.options.disabled) {
+    if (this.options.disabled || !isInBrowser()) {
       return Promise.resolve()
     }
     if (event.unique) {
@@ -254,6 +255,9 @@ export class App {
    * @returns An object of the form `{ stop(): void }` to stop the tracking
    */
   trackPages(options?: TrackPagesOptions): TrackPagesResult {
+    if (!isInBrowser()) {
+      return { stop() {} }
+    }
     if (this.trackPageData) {
       return this.trackPageData.result
     }

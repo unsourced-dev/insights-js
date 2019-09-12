@@ -1,12 +1,12 @@
-// not supported by the server just yet!
-// export function number(amount: number, value: string) {
-//   return { type: "number", value, amount }
-// }
+import { isInBrowser } from "./utils"
 
 /**
  * Logs the default locale of the current user.
  */
 export function locale() {
+  if (!isInBrowser()) {
+    return { type: "locale", value: "<not-in-browser>" }
+  }
   const value = typeof navigator.languages !== "undefined" ? navigator.languages[0] : navigator.language
   return { type: "locale", value: value || "<none>" }
 }
@@ -30,6 +30,9 @@ function getScreenType() {
  * - width > 1440: xl -> large desktop
  */
 export function screenType() {
+  if (!isInBrowser()) {
+    return { type: "screen-type", value: "<not-in-browser>" }
+  }
   return { type: "screen-type", value: getScreenType() }
 }
 
@@ -37,6 +40,9 @@ export function screenType() {
  * Logs the referrer on the current page, or `<none>` if the page has no referrer.
  */
 export function referrer() {
+  if (!isInBrowser()) {
+    return { type: "referrer", value: "<not-in-browser>" }
+  }
   return { type: "referrer", value: document.referrer || "<none>" }
 }
 
@@ -48,6 +54,9 @@ export function referrer() {
  * @param search `true` to log the hash, `false` by default
  */
 export function path(hash: boolean = false, search: boolean = false) {
+  if (!isInBrowser()) {
+    return { type: "path", value: "<not-in-browser>" }
+  }
   let value = window.location.pathname
 
   const _hash = window.location.hash

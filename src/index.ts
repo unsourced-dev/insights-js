@@ -1,5 +1,6 @@
 import * as parameters from "./parameters"
 import { App, AppOptions, TrackEventPayload, TrackPagesOptions, TrackPagesResult } from "./App"
+import { isInBrowser } from "./utils"
 
 export { parameters }
 export { App, AppOptions, TrackEventPayload, TrackPagesOptions, TrackPagesResult }
@@ -15,7 +16,7 @@ export const apps: App[] = []
  * @returns The default app
  */
 export function init(projectId: string, options?: AppOptions): App {
-  if (apps.length > 0) {
+  if (!isInBrowser() || apps.length > 0) {
     throw new Error("Already initialized!")
   }
   const result = new App(projectId, options)
@@ -30,7 +31,7 @@ export function init(projectId: string, options?: AppOptions): App {
  */
 export function track(event: TrackEventPayload): void {
   const app = apps[0]
-  if (!app) throw new Error("No intialized apps!")
+  if (!app || !isInBrowser()) return
 
   app.track(event)
 }
@@ -54,7 +55,7 @@ export function track(event: TrackEventPayload): void {
  */
 export function trackPages(options?: TrackPagesOptions): TrackPagesResult {
   const app = apps[0]
-  if (!app) throw new Error("No intialized apps!")
+  if (!app || !isInBrowser()) return { stop() {} }
 
   return app.trackPages(options)
 }
