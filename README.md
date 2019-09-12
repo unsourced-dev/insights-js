@@ -73,15 +73,16 @@ Just call `track()`
 
 ```js
 track({
-  id: "user-subscribed",
+  id: "user-registered",
   parameters: {
-    plan: "Startup"
+    method: "google",
+    from: "top-link"
   }
 })
 ```
 
 Here is the result in the dashboard:
-![Event User Subscribed in dashboard](./images/user-subscribed.png)
+![Event User Registered in dashboard](./images/user-registered.png)
 
 ### Custom parameters
 
@@ -104,7 +105,7 @@ track({
 Result in the dashboard:
 ![Event read post](./images/read-post.png)
 
-See the full list [in the API documentation](#parameters).
+See the full list [in the parameters'API documentation](#parameters).
 
 ### Untracking events
 
@@ -143,9 +144,46 @@ track({
 Here is the result in the dashboard:
 ![Event User Subscribed in dashboard](./images/user-subscribed.png)
 
+### Tracking page views
+
+TODO
+
+### Tracking on multiple projects
+
+The calls to `init()` and `track()` are wrappers are methods on the `App` class.
+You may instantiate any use one app per project - with or without the default App:
+
+```js
+import { App } from "insights-js"
+
+// equivalent to init("project-1-id")
+const app1 = new App("project-1-id")
+const app2 = new App("project-2-id")
+
+// will show up in project 1's dashboard
+app1.track({
+  id: "user-registered",
+  parameters: {
+    method: "google",
+    from: "top-link"
+  }
+})
+
+// will show up in project 2's dashboard
+app2.track({
+  id: "read-post",
+  parameters: {
+    // this will track the locale of the user, useful to know if we should translate our posts
+    locale: parameters.locale(),
+    // this will track the type of screen on which the user reads the post, useful for useability
+    screenSize: parameters.screenType()
+  }
+})
+```
+
 ## API
 
-### init(projectId, options)
+### `init(projectId, options)`
 
 ```ts
 init(projectId: string, options?: InitOptions): void
@@ -159,24 +197,62 @@ The projectId to track this event with, you can find this in the page of your pr
 
 `options?: AppOptions`
 _Optional_
+_Default value:_ `{}`
 
-| Option       |  Default Value | Description                                                                                                                                   |
-| ------------ | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| ignoreErrors | `false`        | When set to `true` any error that may occur when tracking events will be ignored. It is reccomended to set this flag to `true` on production. |
+`options.ignoreErrors: boolean`
+_Optional_
+_Default value:_ `false`
+When set to `true` any error that may occur when tracking events will be ignored. It is reccomended to set this flag to `true` on production.
 
-### track(event)
+`options.disabled: boolean`
+_Optional_
+_Default value:_ `false`
+When set to `true`, all calls are disabled.
+This flag is useful to disable the tracking based on the environment or URL.
 
-#### arguments
+### `track(event)`
+
+```ts
+track(event: Event): Promise<void>
+```
+
+**arguments**
 
 `event: Event`
 _Mandatory_
+The event to track
 
-| Event attribute |  Default Value | Description                                                                                                                                                                                                                                                                                                                                                                                                               |
-| --------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| id              |                | The id of the event to track, should be a human readable id in `kebab-case`                                                                                                                                                                                                                                                                                                                                               |
-| parameters      | `{}`           | A map of `key -> value` pairs. Getinsights keeps track of the number of events logged for each value.                                                                                                                                                                                                                                                                                                                     |
-| unique          | `false`        | When true, check if a similar event (i.e. same id & same parameters), has already been logged **with the unique flag** in this session. If a similar event has already been logged, it skips it.                                                                                                                                                                                                                          |
-| remove          | `false`        | Certain events last through time and may be undone or cancelled after they have been logged. For example, when tracking subscription to services or people. For these events, it is very useful to be able to know: when an event is tracked, when an event is marked as cancelled, the current number of active (`tracked - cancelled`) events. When this flag is set to `true`, the given event is marked as cancelled. |
+`event.id: string`
+_Mandatory_
+The id of the event to track, should be a human readable id in `kebab-case`.
+
+`event.parameters: { [key: string]: string }`
+_Optional_
+_Default value:_ `{}`
+A map of `(key: string) -> (value: string)` pairs.
+Getinsights keeps track of the number of events logged for each value.
+You may also use the `parameters` variable to generate built-in values.
+See the full list [in the parameters'API documentation](#parameters).
+
+`event.unique: boolean`
+_Optional_
+_Default value:_ `false`
+When true, check if a similar event (i.e. same id & same parameters), has already been logged **with the unique flag** in this session.
+If a similar event has already been logged, it skips it.
+
+`event.remove: boolean`
+_Optional_
+_Default value:_ `false`
+Certain events last through time and may be undone or cancelled after they have been logged.
+For example, when tracking subscription to services or people.
+
+For these events, it is very useful to be able to know:
+
+- when an event is tracked
+- when an event is marked as cancelled
+- the current number of active (`tracked - cancelled`) events.
+
+When this flag is set to `true`, the given event is marked as cancelled.
 
 **Examples:**
 
@@ -219,31 +295,55 @@ track({
 })
 ```
 
+### `trackPage(options)`
+
+```ts
+trackPage(options?: TrackPageOptions): TrackPageResult
+```
+
+TODO
+
+**arguments**
+
 ### Parameters
 
-#### parameters.locale()
+#### `parameters.locale()`
 
-Tracks the `locale` of the current user, for example: `en-US`, `pt-BR` or `fr-FR`
+Gets the `locale` of the current user, for example: `en-US`, `pt-BR` or `fr-FR`.
 
-#### parameters.screenType()
+#### `parameters.screenType()`
 
-Tracks the type of screen the user is currently on:
+Gets the type of screen the user is currently on, possible return values:
 
-| Screen    | Value | Description   |
-| --------- | ----- | ------------- |
-| `<= 414`  | `xs`  | Mobile phone  |
-| `<= 800`  | `s`   | Tablet        |
-| `<= 1200` | `m`   | Small laptop  |
-| `<= 1600` | `l`   | Small desktop |
-| `> 1600`  | `xl`  | Large desktop |
+- `"xs"` if `screen width <= 414px`: Mobile phone
+- `"s"` if `screen width <= 800px`: Tablet
+- `"m"` if `screen width <= 1200px`: Small laptop
+- `"l"` if `screen width <= 1600px`: Large laptop / small desktop
+- `"xl"` if `screen width > 1600px`: Large desktop
 
-#### parameters.referrer()
+#### `parameters.referrer()`
 
-Tracks the referrer of the user.
+Gets the referrer of the user.
 
-#### parameters.path()
+For example `"https://google.com"` if the user came from Google.
 
-Tracks the current path (segment of the URL after the domain) of the user.
+#### `parameters.path(hash, search)`
+
+```ts
+path(hash?: boolean, search?: boolean)
+```
+
+Gets the current path (segment of the URL after the domain) of the user.
+
+`hash?: boolean`
+_Optional_
+_Default value:_ `false`
+When `true`, also returns the hash segment of the URL.
+
+`search?: boolean`
+_Optional_
+_Default value:_ `false`
+When `true`, also returns the search segment of the URL.
 
 ## License
 
