@@ -4,7 +4,7 @@
 
 # Interface: ParameterValue
 
-A parameter to log
+A parameter's value to log.
 
 ## Hierarchy
 
@@ -23,7 +23,12 @@ A parameter to log
 
 • **type**? : *undefined | string*
 
-*Defined in [App.ts:32](https://github.com/getinsights/insights-js/blob/fcce543/src/App.ts#L32)*
+*Defined in [App.ts:45](https://github.com/getinsights/insights-js/blob/d0bb780/src/App.ts#L45)*
+
+A possible type for this value.
+This will be used by [insights.io](https://insights.io)'s web interface to display certain parameters in specific ways.
+
+You should not set the value manually, instead, use provided parameters functions in `parameters`.
 
 ___
 
@@ -31,4 +36,6 @@ ___
 
 • **value**: *string*
 
-*Defined in [App.ts:33](https://github.com/getinsights/insights-js/blob/fcce543/src/App.ts#L33)*
+*Defined in [App.ts:49](https://github.com/getinsights/insights-js/blob/d0bb780/src/App.ts#L49)*
+
+The actual value.

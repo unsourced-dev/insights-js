@@ -16,3 +16,5 @@
 * [ParameterValue](../interfaces/_app_.parametervalue.md)
 * [StringMap](../interfaces/_app_.stringmap.md)
 * [TrackEventPayload](../interfaces/_app_.trackeventpayload.md)
+* [TrackPagesOptions](../interfaces/_app_.trackpagesoptions.md)
+* [TrackPagesResult](../interfaces/_app_.trackpagesresult.md)

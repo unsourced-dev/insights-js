@@ -14,6 +14,7 @@
 
 * [init](_index_.md#init)
 * [track](_index_.md#track)
+* [trackPages](_index_.md#trackpages)
 
 ## Variables
 
@@ -21,15 +22,15 @@
 
 • **apps**: *[App](../classes/_app_.app.md)[]* =  []
 
-*Defined in [index.ts:6](https://github.com/getinsights/insights-js/blob/fcce543/src/index.ts#L6)*
+*Defined in [index.ts:7](https://github.com/getinsights/insights-js/blob/d0bb780/src/index.ts#L7)*
 
 ## Functions
 
 ###  init
 
-▸ **init**(`projectId`: string, `options?`: [AppOptions](../interfaces/_app_.appoptions.md)): *void*
+▸ **init**(`projectId`: string, `options?`: [AppOptions](../interfaces/_app_.appoptions.md)): *[App](../classes/_app_.app.md)*
 
-*Defined in [index.ts:14](https://github.com/getinsights/insights-js/blob/fcce543/src/index.ts#L14)*
+*Defined in [index.ts:17](https://github.com/getinsights/insights-js/blob/d0bb780/src/index.ts#L17)*
 
 Initialize a default app for the given project with the given options.
 
@@ -38,9 +39,11 @@ Initialize a default app for the given project with the given options.
 Name | Type | Description |
 ------ | ------ | ------ |
 `projectId` | string | The project for which to initialize the library |
-`options?` | [AppOptions](../interfaces/_app_.appoptions.md) | The options  |
+`options?` | [AppOptions](../interfaces/_app_.appoptions.md) | The options to use  |
 
-**Returns:** *void*
+**Returns:** *[App](../classes/_app_.app.md)*
+
+The default app
 
 ___
 
@@ -48,7 +51,7 @@ ___
 
 ▸ **track**(`event`: [TrackEventPayload](../interfaces/_app_.trackeventpayload.md)): *void*
 
-*Defined in [index.ts:26](https://github.com/getinsights/insights-js/blob/fcce543/src/index.ts#L26)*
+*Defined in [index.ts:31](https://github.com/getinsights/insights-js/blob/d0bb780/src/index.ts#L31)*
 
 Tracks an event using the default app, you must call `init()` before calling this.
 
@@ -59,3 +62,33 @@ Name | Type | Description |
 `event` | [TrackEventPayload](../interfaces/_app_.trackeventpayload.md) | The event to track  |
 
 **Returns:** *void*
+
+___
+
+###  trackPages
+
+▸ **trackPages**(`options?`: [TrackPagesOptions](../interfaces/_app_.trackpagesoptions.md)): *[TrackPagesResult](../interfaces/_app_.trackpagesresult.md)*
+
+*Defined in [index.ts:55](https://github.com/getinsights/insights-js/blob/d0bb780/src/index.ts#L55)*
+
+Tracks page views using the default app.
+This method checks if the URL changed every so often and tracks new pages accordingly.
+
+**Important note on bounce rate and unique views:**
+
+This method does not store any cookie or local storage, it expects that you use a client-side router.
+e.g. `react-router`, `nextjs`'s router, etc...
+The bounce rate and unique views will not be accurate if you do not use a client-side router,
+in these cases, user `trackPages(false)` to disable tracking of the bounce rate and unique page views.
+
+By default, does not track the `location.hash` nor the `location.search`.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`options?` | [TrackPagesOptions](../interfaces/_app_.trackpagesoptions.md) | The options to use for the tracking  |
+
+**Returns:** *[TrackPagesResult](../interfaces/_app_.trackpagesresult.md)*
+
+An object of the form `{ stop(): void }` to stop the tracking

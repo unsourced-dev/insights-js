@@ -20,11 +20,15 @@ A class that contains a `projectId` and related configuration to track events pa
 
 * [options](_app_.app.md#options)
 * [projectId](_app_.app.md#projectid)
+* [trackPageData](_app_.app.md#private-trackpagedata)
 * [uniques](_app_.app.md#private-uniques)
 
 ### Methods
 
 * [track](_app_.app.md#track)
+* [trackPageChange](_app_.app.md#private-trackpagechange)
+* [trackPages](_app_.app.md#trackpages)
+* [trackSinglePage](_app_.app.md#private-tracksinglepage)
 
 ## Constructors
 
@@ -32,7 +36,7 @@ A class that contains a `projectId` and related configuration to track events pa
 
 \+ **new App**(`projectId`: string, `options`: [AppOptions](../interfaces/_app_.appoptions.md)): *[App](_app_.app.md)*
 
-*Defined in [App.ts:97](https://github.com/getinsights/insights-js/blob/fcce543/src/App.ts#L97)*
+*Defined in [App.ts:203](https://github.com/getinsights/insights-js/blob/d0bb780/src/App.ts#L203)*
 
 **Parameters:**
 
@@ -49,7 +53,7 @@ Name | Type | Default |
 
 • **options**: *[AppOptions](../interfaces/_app_.appoptions.md)*
 
-*Defined in [App.ts:99](https://github.com/getinsights/insights-js/blob/fcce543/src/App.ts#L99)*
+*Defined in [App.ts:205](https://github.com/getinsights/insights-js/blob/d0bb780/src/App.ts#L205)*
 
 ___
 
@@ -57,7 +61,15 @@ ___
 
 • **projectId**: *string*
 
-*Defined in [App.ts:99](https://github.com/getinsights/insights-js/blob/fcce543/src/App.ts#L99)*
+*Defined in [App.ts:205](https://github.com/getinsights/insights-js/blob/d0bb780/src/App.ts#L205)*
+
+___
+
+### `Private` trackPageData
+
+• **trackPageData**: *TrackPageData | null* =  null
+
+*Defined in [App.ts:203](https://github.com/getinsights/insights-js/blob/d0bb780/src/App.ts#L203)*
 
 ___
 
@@ -65,7 +77,7 @@ ___
 
 • **uniques**: *[StringMap](../interfaces/_app_.stringmap.md)‹boolean›*
 
-*Defined in [App.ts:97](https://github.com/getinsights/insights-js/blob/fcce543/src/App.ts#L97)*
+*Defined in [App.ts:200](https://github.com/getinsights/insights-js/blob/d0bb780/src/App.ts#L200)*
 
 ## Methods
 
@@ -73,7 +85,7 @@ ___
 
 ▸ **track**(`event`: [TrackEventPayload](../interfaces/_app_.trackeventpayload.md)): *Promise‹void›*
 
-*Defined in [App.ts:108](https://github.com/getinsights/insights-js/blob/fcce543/src/App.ts#L108)*
+*Defined in [App.ts:216](https://github.com/getinsights/insights-js/blob/d0bb780/src/App.ts#L216)*
 
 Track an occurence of the given event.
 
@@ -86,3 +98,52 @@ Name | Type | Description |
 **Returns:** *Promise‹void›*
 
 a promise that resolves when the call to the API resolves.
+
+___
+
+### `Private` trackPageChange
+
+▸ **trackPageChange**(): *void*
+
+*Defined in [App.ts:285](https://github.com/getinsights/insights-js/blob/d0bb780/src/App.ts#L285)*
+
+**Returns:** *void*
+
+___
+
+###  trackPages
+
+▸ **trackPages**(`options?`: [TrackPagesOptions](../interfaces/_app_.trackpagesoptions.md)): *[TrackPagesResult](../interfaces/_app_.trackpagesresult.md)*
+
+*Defined in [App.ts:256](https://github.com/getinsights/insights-js/blob/d0bb780/src/App.ts#L256)*
+
+Tracks page views. This method checks if the URL changed every so often and tracks new pages accordingly.
+
+**Important note on bounce rate and unique views:**
+
+This method does not store any cookie or local storage, it expects that you use a client-side router.
+e.g. `react-router`, `nextjs`'s router, etc...
+The bounce rate and unique views will not be accurate if you do not use a client-side router,
+in these cases, user `trackPages(false)` to disable tracking of the bounce rate and unique page views.
+
+By default, does not track the `location.hash` nor the `location.search`
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`options?` | [TrackPagesOptions](../interfaces/_app_.trackpagesoptions.md) | The options to use for the tracking  |
+
+**Returns:** *[TrackPagesResult](../interfaces/_app_.trackpagesresult.md)*
+
+An object of the form `{ stop(): void }` to stop the tracking
+
+___
+
+### `Private` trackSinglePage
+
+▸ **trackSinglePage**(): *void*
+
+*Defined in [App.ts:298](https://github.com/getinsights/insights-js/blob/d0bb780/src/App.ts#L298)*
+
+**Returns:** *void*

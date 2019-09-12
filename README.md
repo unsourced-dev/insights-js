@@ -183,6 +183,8 @@ app2.track({
 
 ## API
 
+See the detailed API documentation [in the docs folder](./docs/README.md).
+
 ### `init(projectId, options)`
 
 ```ts

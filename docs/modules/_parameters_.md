@@ -19,7 +19,7 @@
 
 ▸ **locale**(): *object*
 
-*Defined in [parameters.ts:9](https://github.com/getinsights/insights-js/blob/fcce543/src/parameters.ts#L9)*
+*Defined in [parameters.ts:9](https://github.com/getinsights/insights-js/blob/d0bb780/src/parameters.ts#L9)*
 
 Logs the default locale of the current user.
 
@@ -31,10 +31,10 @@ ___
 
 ▸ **path**(`hash`: boolean, `search`: boolean): *object*
 
-*Defined in [parameters.ts:50](https://github.com/getinsights/insights-js/blob/fcce543/src/parameters.ts#L50)*
+*Defined in [parameters.ts:50](https://github.com/getinsights/insights-js/blob/d0bb780/src/parameters.ts#L50)*
 
 Logs the current path within the application.
-By default, does not log the `locaiton.hash` nor the `location.search`
+By default, does not log the `location.hash` nor the `location.search`
 
 **Parameters:**
 
@@ -51,7 +51,7 @@ ___
 
 ▸ **referrer**(): *object*
 
-*Defined in [parameters.ts:39](https://github.com/getinsights/insights-js/blob/fcce543/src/parameters.ts#L39)*
+*Defined in [parameters.ts:39](https://github.com/getinsights/insights-js/blob/d0bb780/src/parameters.ts#L39)*
 
 Logs the referrer on the current page, or `<none>` if the page has no referrer.
 
@@ -63,14 +63,14 @@ ___
 
 ▸ **screenType**(): *object*
 
-*Defined in [parameters.ts:32](https://github.com/getinsights/insights-js/blob/fcce543/src/parameters.ts#L32)*
+*Defined in [parameters.ts:32](https://github.com/getinsights/insights-js/blob/d0bb780/src/parameters.ts#L32)*
 
 Logs the screen type of the current user, based on window size:
 
-- width <= 320: xs
-- width <= 576: s
-- width <= 992: m
-- width <= 1440: l
-- width > 1440: xl
+- width <= 414: xs -> phone
+- width <= 800: s -> tablet
+- width <= 1200: m -> small laptop
+- width <= 1600: l -> large laptop
+- width > 1440: xl -> large desktop
 
 **Returns:** *object*
