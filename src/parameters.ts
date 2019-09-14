@@ -36,6 +36,10 @@ export function screenType() {
   return { type: "screen-type", value: getScreenType() }
 }
 
+function getHost() {
+  return location.protocol + "//" + location.host
+}
+
 /**
  * Logs the referrer on the current page, or `<none>` if the page has no referrer.
  */
@@ -43,6 +47,10 @@ export function referrer() {
   if (!isInBrowser()) {
     return { type: "referrer", value: "<not-in-browser>" }
   }
+  if ((document.referrer || "").startsWith(getHost())) {
+    return { type: "referrer", value: "<none>" }
+  }
+
   return { type: "referrer", value: document.referrer || "<none>" }
 }
 
