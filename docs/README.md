@@ -365,7 +365,7 @@ in these cases, user `trackPages(false)` to disable tracking of the bounce rate 
 
 **returns**
 
-**arguments**
+An object of the form `{ stop(): void }` to cancel page tracking if needed.
 
 ### Parameters
 

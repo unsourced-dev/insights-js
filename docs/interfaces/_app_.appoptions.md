@@ -23,8 +23,6 @@ Additional options used when tracking events
 
 • **disabled**? : *undefined | false | true*
 
-*Defined in [App.ts:19](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L19)*
-
 When `true`, all calls are disabled.
 This flag is useful to disable the tracking based on the environment/URL.
 
@@ -33,8 +31,6 @@ ___
 ### `Optional` ignoreErrors
 
 • **ignoreErrors**? : *undefined | false | true*
-
-*Defined in [App.ts:13](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L13)*
 
 When true, the call to `track(event)` will never throw nor log any error.
 This flag should be set to `true` for production systems.

@@ -22,8 +22,6 @@ The object returned by `App.trackPages()`, used to stop tracking pages.
 
 ▸ **stop**(): *void*
 
-*Defined in [App.ts:184](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L184)*
-
 Stops the tracking of pages.
 
 **Returns:** *void*

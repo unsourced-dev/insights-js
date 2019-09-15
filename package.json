@@ -20,7 +20,8 @@
     "prepublish": "npm run build",
     "build": "rollup -c",
     "start": "rollup -c -w",
-    "doc": "rimraf docs && typedoc --out docs/ src/ --excludeNotExported --tsConfig ./tsconfig.json --theme markdown"
+    "doc": "npm run docs",
+    "docs": "rimraf docs && typedoc --out docs/ . --excludeNotExported --exclude node_modules --tsConfig ./tsconfig.json --theme markdown --hideSources --entryPoint src/index.ts --hideGenerator"
   },
   "prettier": {
     "semi": false,

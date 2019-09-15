@@ -24,8 +24,6 @@ The options to use when tracking pages
 
 • **hash**? : *undefined | false | true*
 
-*Defined in [App.ts:170](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L170)*
-
 `true` to track the hash portion of the URL.
 
 `false` by default.
@@ -36,8 +34,6 @@ ___
 
 • **search**? : *undefined | false | true*
 
-*Defined in [App.ts:176](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L176)*
-
 `true` to track the search portion of the URL.
 
 `false` by default.
@@ -47,8 +43,6 @@ ___
 ### `Optional` unique
 
 • **unique**? : *undefined | false | true*
-
-*Defined in [App.ts:164](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L164)*
 
 When `true`, tracks unique page views and the bounce rate in addition to total page views.
 

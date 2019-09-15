@@ -18,14 +18,13 @@ The payload to call
 * [parameters](_app_.trackeventpayload.md#optional-parameters)
 * [remove](_app_.trackeventpayload.md#optional-remove)
 * [unique](_app_.trackeventpayload.md#optional-unique)
+* [update](_app_.trackeventpayload.md#optional-update)
 
 ## Properties
 
 ###  id
 
 • **id**: *string*
-
-*Defined in [App.ts:63](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L63)*
 
 A unique identifier for this event.
 This should be formatted as `pascal-case`.
@@ -37,8 +36,6 @@ ___
 ### `Optional` parameters
 
 • **parameters**? : *[StringMap](_app_.stringmap.md)‹string | [ParameterValue](_app_.parametervalue.md)›*
-
-*Defined in [App.ts:111](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L111)*
 
 The parameters to log along this event.
 Each key in the map is the parameter name, and the value it's value.
@@ -91,8 +88,6 @@ ___
 
 • **remove**? : *undefined | false | true*
 
-*Defined in [App.ts:152](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L152)*
-
 Certain events last through time and may be undone or cancelled after they have been logged.
 For example, when tracking subscription to services or people.
 
@@ -124,15 +119,25 @@ track({
 })
 ```
 
+When used in combination with `update`, only remove from the counts of the parameters.
+Useful to "cancel" a parameter value.
+
 ___
 
 ### `Optional` unique
 
 • **unique**? : *undefined | false | true*
 
-*Defined in [App.ts:118](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L118)*
-
 When true, check if a similar event (i.e. same id & same parameters),
 has already been logged **with the unique flag** in this session.
 
 If a similar event has already been logged, it skips it.
+
+___
+
+### `Optional` update
+
+• **update**? : *undefined | false | true*
+
+When `true`, the count of an event is not updated, only parameter counts.
+This can be used to modify the value of parameters.

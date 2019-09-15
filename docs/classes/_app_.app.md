@@ -36,8 +36,6 @@ A class that contains a `projectId` and related configuration to track events pa
 
 \+ **new App**(`projectId`: string, `options`: [AppOptions](../interfaces/_app_.appoptions.md)): *[App](_app_.app.md)*
 
-*Defined in [App.ts:204](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L204)*
-
 **Parameters:**
 
 Name | Type | Default |
@@ -53,15 +51,11 @@ Name | Type | Default |
 
 • **options**: *[AppOptions](../interfaces/_app_.appoptions.md)*
 
-*Defined in [App.ts:206](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L206)*
-
 ___
 
 ###  projectId
 
 • **projectId**: *string*
-
-*Defined in [App.ts:206](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L206)*
 
 ___
 
@@ -69,23 +63,17 @@ ___
 
 • **trackPageData**: *TrackPageData | null* =  null
 
-*Defined in [App.ts:204](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L204)*
-
 ___
 
 ### `Private` uniques
 
 • **uniques**: *[StringMap](../interfaces/_app_.stringmap.md)‹boolean›*
 
-*Defined in [App.ts:201](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L201)*
-
 ## Methods
 
 ###  track
 
 ▸ **track**(`event`: [TrackEventPayload](../interfaces/_app_.trackeventpayload.md)): *Promise‹void›*
-
-*Defined in [App.ts:217](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L217)*
 
 Track an occurence of the given event.
 
@@ -105,8 +93,6 @@ ___
 
 ▸ **trackPageChange**(): *void*
 
-*Defined in [App.ts:289](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L289)*
-
 **Returns:** *void*
 
 ___
@@ -114,8 +100,6 @@ ___
 ###  trackPages
 
 ▸ **trackPages**(`options?`: [TrackPagesOptions](../interfaces/_app_.trackpagesoptions.md)): *[TrackPagesResult](../interfaces/_app_.trackpagesresult.md)*
-
-*Defined in [App.ts:257](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L257)*
 
 Tracks page views. This method checks if the URL changed every so often and tracks new pages accordingly.
 
@@ -143,7 +127,5 @@ ___
 ### `Private` trackSinglePage
 
 ▸ **trackSinglePage**(): *void*
-
-*Defined in [App.ts:302](https://github.com/getinsights/insights-js/blob/61408e0/src/App.ts#L302)*
 
 **Returns:** *void*
