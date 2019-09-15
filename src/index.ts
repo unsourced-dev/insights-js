@@ -5,7 +5,23 @@ import { isInBrowser } from "./utils"
 export { parameters }
 export { App, AppOptions, TrackEventPayload, TrackPagesOptions, TrackPagesResult }
 
-export const apps: App[] = []
+/**
+ * This file is the entry point for the `insights-js` library.
+ *
+ * It contains basic methods to initialize and log events:
+ * ```typescript
+ * init(projectId: string, options?: AppOptions): App
+ * track(event: TrackEventPayload): void
+ * trackPages(options?: TrackPagesOptions): TrackPagesResult
+ * ```
+ *
+ * As well as the `parameters` helpers.
+ */
+
+/**
+ * The default application, or `null` if none.
+ */
+export let DEFAULT_APP: App | null = null
 
 /**
  * Initialize a default app for the given project with the given options.
@@ -16,12 +32,11 @@ export const apps: App[] = []
  * @returns The default app
  */
 export function init(projectId: string, options?: AppOptions): App {
-  if (!isInBrowser() || apps.length > 0) {
+  if (!isInBrowser() || !!DEFAULT_APP) {
     throw new Error("Already initialized!")
   }
-  const result = new App(projectId, options)
-  apps.push(result)
-  return result
+  DEFAULT_APP = new App(projectId, options)
+  return DEFAULT_APP
 }
 
 /**
@@ -30,10 +45,9 @@ export function init(projectId: string, options?: AppOptions): App {
  * @param event The event to track
  */
 export function track(event: TrackEventPayload): void {
-  const app = apps[0]
-  if (!app || !isInBrowser()) return
+  if (!DEFAULT_APP || !isInBrowser()) return
 
-  app.track(event)
+  DEFAULT_APP.track(event)
 }
 
 /**
@@ -54,8 +68,7 @@ export function track(event: TrackEventPayload): void {
  * @returns An object of the form `{ stop(): void }` to stop the tracking
  */
 export function trackPages(options?: TrackPagesOptions): TrackPagesResult {
-  const app = apps[0]
-  if (!app || !isInBrowser()) return { stop() {} }
+  if (!DEFAULT_APP || !isInBrowser()) return { stop() {} }
 
-  return app.trackPages(options)
+  return DEFAULT_APP.trackPages(options)
 }

@@ -109,6 +109,7 @@ export interface TrackEventPayload {
    * ```
    */
   parameters?: StringMap<string | ParameterValue>
+
   /**
    * When true, check if a similar event (i.e. same id & same parameters),
    * has already been logged **with the unique flag** in this session.
@@ -148,8 +149,17 @@ export interface TrackEventPayload {
    *   remove: true
    * })
    * ```
+   *
+   * When used in combination with `update`, only remove from the counts of the parameters.
+   * Useful to "cancel" a parameter value.
    */
   remove?: boolean
+
+  /**
+   * When `true`, the count of an event is not updated, only parameter counts.
+   * This can be used to modify the value of parameters.
+   */
+  update?: boolean
 }
 
 /**
@@ -231,6 +241,7 @@ export class App {
     }
     if (event.remove) body.remove = true
     if (event.parameters) body.parameters = event.parameters
+    if (event.update) body.update = true
 
     return unfetch("https://getinsights.io/app/tics", {
       method: "post",
