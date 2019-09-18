@@ -75,7 +75,13 @@ ___
 
 ### `Private` getPreviousPage
 
-▸ **getPreviousPage**(): *string*
+▸ **getPreviousPage**(`first`: boolean): *string*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`first` | boolean |
 
 **Returns:** *string*
 
@@ -135,12 +141,13 @@ ___
 
 ### `Private` trackSinglePage
 
-▸ **trackSinglePage**(`first`: boolean): *void*
+▸ **trackSinglePage**(`first`: boolean, `path`: string): *void*
 
 **Parameters:**
 
 Name | Type |
 ------ | ------ |
 `first` | boolean |
+`path` | string |
 
 **Returns:** *void*
