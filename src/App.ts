@@ -192,7 +192,7 @@ interface TrackPageData {
   hash: boolean
   search: boolean
   result: TrackPagesResult
-
+  isOnFirstPage: boolean
   time: number
   path: string
 }
@@ -267,6 +267,7 @@ export class App {
       hash,
       search,
       path: parameters.path(hash, search).value,
+      isOnFirstPage: true,
       time: Date.now(),
       result: {
         stop() {
@@ -308,13 +309,18 @@ export class App {
 
   private trackSinglePage(first: boolean, path: string) {
     if (!this.trackPageData) return
-    const { time } = this.trackPageData
+
+    this.trackPageData.isOnFirstPage = first && !isReferrerSameHost()
+    const { time, isOnFirstPage } = this.trackPageData
     const params: any = {
       path,
       referrer: parameters.referrer(),
       locale: parameters.locale(),
-      screenType: parameters.screenType(),
-      unique: first && !isReferrerSameHost() ? "Yes" : "No"
+      screenType: parameters.screenType()
+    }
+
+    if (isOnFirstPage) {
+      params.uniqueViews = path
     }
 
     const previous = this.getPreviousPage(first)
@@ -325,7 +331,7 @@ export class App {
     if (!first) {
       const now = Date.now()
       this.trackPageData.time = now
-      params.duration = parameters.durationInterval(now - time)
+      params.duration = parameters.durationInterval(now - time, path + " - ")
     }
 
     this.trackPageData.path = path
@@ -337,19 +343,30 @@ export class App {
 
   private trackLastPageTimeSpent() {
     const time = this.trackPageData && this.trackPageData.time
-    if (!time || typeof navigator.sendBeacon !== "function" || this.options.disabled) {
+    if (!time || typeof navigator.sendBeacon !== "function" || this.options.disabled || !this.trackPageData) {
       return
     }
+    const { isOnFirstPage, path } = this.trackPageData
+    const params: any = {}
 
-    const now = Date.now()
+    // add the duration
+    params.duration = parameters.durationInterval(Date.now() - time, path + " - ")
+
+    const nextUrl: string = (document.activeElement && (document.activeElement as any).href) || ""
+    if (!nextUrl) {
+      // user closed the window
+      params.bounces = isOnFirstPage ? "Yes" : "No"
+    } else if (!nextUrl.startsWith("/") && !nextUrl.startsWith(getHost())) {
+      // link outside of the app
+      params.transition = parameters.transition(path, nextUrl)
+    }
+
     navigator.sendBeacon(
       "https://getinsights.io/app/tics",
       JSON.stringify({
         id: "page-views",
         projectId: this.projectId,
-        parameters: {
-          duration: parameters.durationInterval(now - time)
-        },
+        parameters: params,
         ignoreErrors: this.options.ignoreErrors || false,
         update: true
       })

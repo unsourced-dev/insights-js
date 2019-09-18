@@ -116,22 +116,22 @@ export function transition(previous: string, next: string) {
  *
  * @param durationMs the duration to encode, in milliseconds
  */
-export function durationInterval(durationMs: number) {
+export function durationInterval(durationMs: number, prefix: string = "") {
   if (durationMs < 5000) {
-    return { type: "duration-interval", value: "< 5s" }
+    return { type: "duration-interval", value: prefix + "< 5s" }
   }
   if (durationMs < 15000) {
-    return { type: "duration-interval", value: "< 15s" }
+    return { type: "duration-interval", value: prefix + "< 15s" }
   }
   if (durationMs < 30000) {
-    return { type: "duration-interval", value: "< 30s" }
+    return { type: "duration-interval", value: prefix + "< 30s" }
   }
   if (durationMs < 60000) {
-    return { type: "duration-interval", value: "< 1m" }
+    return { type: "duration-interval", value: prefix + "< 1m" }
   }
   if (durationMs < 5 * 60000) {
-    return { type: "duration-interval", value: "< 5m" }
+    return { type: "duration-interval", value: prefix + "< 5m" }
   }
 
-  return { type: "duration-interval", value: "> 5m" }
+  return { type: "duration-interval", value: prefix + "> 5m" }
 }
