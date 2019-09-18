@@ -278,7 +278,7 @@ export class App {
     // Track the first/current page view
     this.trackSinglePage(true, this.trackPageData.path)
 
-    window.addEventListener("beforeunload", this.trackLastPageTimeSpent)
+    window.addEventListener("unload", this.trackLastPageTimeSpent)
 
     return this.trackPageData.result
   }
@@ -337,17 +337,22 @@ export class App {
 
   private trackLastPageTimeSpent() {
     const time = this.trackPageData && this.trackPageData.time
-    if (!time) {
+    if (!time || typeof navigator.sendBeacon !== "function" || this.options.disabled) {
       return
     }
 
     const now = Date.now()
-    this.track({
-      id: "page-views",
-      parameters: {
-        duration: parameters.durationInterval(now - time)
-      },
-      update: true
-    })
+    navigator.sendBeacon(
+      "https://getinsights.io/app/tics",
+      JSON.stringify({
+        id: "page-views",
+        projectId: this.projectId,
+        parameters: {
+          duration: parameters.durationInterval(now - time)
+        },
+        ignoreErrors: this.options.ignoreErrors || false,
+        update: true
+      })
+    )
   }
 }
