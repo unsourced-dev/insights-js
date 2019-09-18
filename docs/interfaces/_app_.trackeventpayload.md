@@ -35,7 +35,7 @@ ___
 
 ### `Optional` parameters
 
-• **parameters**? : *[StringMap](_app_.stringmap.md)‹string | [ParameterValue](_app_.parametervalue.md)›*
+• **parameters**? : *StringMap‹string | [ParameterValue](_app_.parametervalue.md)›*
 
 The parameters to log along this event.
 Each key in the map is the parameter name, and the value it's value.

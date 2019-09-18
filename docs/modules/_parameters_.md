@@ -8,18 +8,43 @@
 
 ### Functions
 
+* [durationInterval](_parameters_.md#durationinterval)
 * [locale](_parameters_.md#locale)
 * [path](_parameters_.md#path)
 * [referrer](_parameters_.md#referrer)
 * [screenType](_parameters_.md#screentype)
+* [transition](_parameters_.md#transition)
 
 ## Functions
+
+###  durationInterval
+
+▸ **durationInterval**(`durationMs`: number): *object*
+
+Track a duration at several intervals:
+
+- < 5 seconds
+- < 15 seconds
+- < 30 seconds
+- < 1 minute
+- < 5 minutes
+- \> 5 minutes
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`durationMs` | number | the duration to encode, in milliseconds  |
+
+**Returns:** *object*
+
+___
 
 ###  locale
 
 ▸ **locale**(): *object*
 
-Logs the default locale of the current user.
+Track the default locale of the current user.
 
 **Returns:** *object*
 
@@ -29,7 +54,7 @@ ___
 
 ▸ **path**(`hash`: boolean, `search`: boolean): *object*
 
-Logs the current path within the application.
+Track the current path within the application.
 By default, does not log the `location.hash` nor the `location.search`
 
 **Parameters:**
@@ -47,7 +72,7 @@ ___
 
 ▸ **referrer**(): *object*
 
-Logs the referrer on the current page, or `<none>` if the page has no referrer.
+Track the referrer on the current page, or `<none>` if the page has no referrer.
 
 **Returns:** *object*
 
@@ -57,12 +82,29 @@ ___
 
 ▸ **screenType**(): *object*
 
-Logs the screen type of the current user, based on window size:
+Track the screen type of the current user, based on window size:
 
 - width <= 414: XS -> phone
 - width <= 800: S -> tablet
 - width <= 1200: M -> small laptop
 - width <= 1600: L -> large laptop
 - width > 1440: XL -> large desktop
+
+**Returns:** *object*
+
+___
+
+###  transition
+
+▸ **transition**(`previous`: string, `next`: string): *object*
+
+Track a transition between two values.
+
+**Parameters:**
+
+Name | Type | Description |
+------ | ------ | ------ |
+`previous` | string | The previous value |
+`next` | string | The next value  |
 
 **Returns:** *object*

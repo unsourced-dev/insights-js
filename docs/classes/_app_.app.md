@@ -25,7 +25,9 @@ A class that contains a `projectId` and related configuration to track events pa
 
 ### Methods
 
+* [getPreviousPage](_app_.app.md#private-getpreviouspage)
 * [track](_app_.app.md#track)
+* [trackLastPageTimeSpent](_app_.app.md#private-tracklastpagetimespent)
 * [trackPageChange](_app_.app.md#private-trackpagechange)
 * [trackPages](_app_.app.md#trackpages)
 * [trackSinglePage](_app_.app.md#private-tracksinglepage)
@@ -67,9 +69,17 @@ ___
 
 ### `Private` uniques
 
-• **uniques**: *[StringMap](../interfaces/_app_.stringmap.md)‹boolean›*
+• **uniques**: *StringMap‹boolean›*
 
 ## Methods
+
+### `Private` getPreviousPage
+
+▸ **getPreviousPage**(): *string*
+
+**Returns:** *string*
+
+___
 
 ###  track
 
@@ -89,6 +99,14 @@ a promise that resolves when the call to the API resolves.
 
 ___
 
+### `Private` trackLastPageTimeSpent
+
+▸ **trackLastPageTimeSpent**(): *void*
+
+**Returns:** *void*
+
+___
+
 ### `Private` trackPageChange
 
 ▸ **trackPageChange**(): *void*
@@ -102,15 +120,6 @@ ___
 ▸ **trackPages**(`options?`: [TrackPagesOptions](../interfaces/_app_.trackpagesoptions.md)): *[TrackPagesResult](../interfaces/_app_.trackpagesresult.md)*
 
 Tracks page views. This method checks if the URL changed every so often and tracks new pages accordingly.
-
-**Important note on bounce rate and unique views:**
-
-This method does not store any cookie or local storage, it expects that you use a client-side router.
-e.g. `react-router`, `nextjs`'s router, etc...
-The bounce rate and unique views will not be accurate if you do not use a client-side router,
-in these cases, user `trackPages(false)` to disable tracking of the bounce rate and unique page views.
-
-By default, does not track the `location.hash` nor the `location.search`
 
 **Parameters:**
 
@@ -126,6 +135,12 @@ ___
 
 ### `Private` trackSinglePage
 
-▸ **trackSinglePage**(): *void*
+▸ **trackSinglePage**(`first`: boolean): *void*
+
+**Parameters:**
+
+Name | Type |
+------ | ------ |
+`first` | boolean |
 
 **Returns:** *void*

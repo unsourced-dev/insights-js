@@ -267,6 +267,11 @@ _Default value:_ `false`
 When true, check if a similar event (i.e. same id & same parameters), has already been logged **with the unique flag** in this session.
 If a similar event has already been logged, it skips it.
 
+`event.update: boolean`
+_Optional_
+_Default value:_ `false`
+When true, only update the counts of the parameters, not the count of the event.
+
 `event.remove: boolean`
 _Optional_
 _Default value:_ `false`
@@ -349,19 +354,7 @@ _Optional_
 _Default value:_ `false`
 `true` to also track the hash portion of the URL.
 
-`options.unique: boolean`
-_Optional_
-_Default value:_ `true`
-`true` to also track the number of unique page views and bounce rate.
-
 A unique page view being defined as the first page tracked in the current session (subsequent pages tracked are not unique).
-
-**Important note on bounce rate and unique views:**
-
-This method does not store any cookie or local storage, it expects that you use a client-side router.
-e.g. `react-router`, `nextjs`'s router, etc...
-The bounce rate and unique views will not be accurate if you do not use a client-side router,
-in these cases, user `trackPages(false)` to disable tracking of the bounce rate and unique page views.
 
 **returns**
 
@@ -392,7 +385,7 @@ For example `"https://google.com"` if the user came from Google.
 #### `parameters.path(hash, search)`
 
 ```ts
-path(hash?: boolean, search?: boolean)
+parameters.path(hash?: boolean, search?: boolean)
 ```
 
 Gets the current path (segment of the URL after the domain) of the user.
@@ -406,6 +399,41 @@ When `true`, also returns the hash segment of the URL.
 _Optional_
 _Default value:_ `false`
 When `true`, also returns the search segment of the URL.
+
+#### `parameters.transition(previous, next)`
+
+```ts
+parameters.transition(previous: string, next: string)
+```
+
+Gets a parameter value that represents a transition between 2 states.
+
+`previous: string`
+_Mandatory_
+The previous state.
+
+`next: string`
+_Mandatory_
+The next state.
+
+#### `parameters.durationInterval(durationMs)`
+
+```ts
+parameters.durationInterval(durationMs: number)
+```
+
+Categorizes a given duration in possible intervals and return the interval:
+
+- `"< 5s"` for durations less than 5 seconds
+- `"< 15s"` for durations less than 15 seconds
+- `"< 30s"` for durations less than 30 seconds
+- `"< 1m"` for durations less than 1 minute
+- `"< 5m"` for durations less than 5 minutes
+- `"> 5m"` for durations of 5 minutes or more
+
+`durationMs: number`
+_Mandatory_
+The duration, in milliseconds.
 
 ## License
 

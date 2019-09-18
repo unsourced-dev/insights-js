@@ -16,7 +16,6 @@ The options to use when tracking pages
 
 * [hash](_app_.trackpagesoptions.md#optional-hash)
 * [search](_app_.trackpagesoptions.md#optional-search)
-* [unique](_app_.trackpagesoptions.md#optional-unique)
 
 ## Properties
 
@@ -37,13 +36,3 @@ ___
 `true` to track the search portion of the URL.
 
 `false` by default.
-
-___
-
-### `Optional` unique
-
-• **unique**? : *undefined | false | true*
-
-When `true`, tracks unique page views and the bounce rate in addition to total page views.
-
-`true` by default.
