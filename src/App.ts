@@ -276,8 +276,9 @@ export class App {
     }
 
     // Track the first/current page view
-    this.trackSinglePage(true)
-    ;(window as any).onbeforeunload(this.trackLastPageTimeSpent)
+    this.trackSinglePage(true, this.trackPageData.path)
+
+    window.addEventListener("beforeunload", this.trackLastPageTimeSpent)
 
     return this.trackPageData.result
   }
@@ -301,15 +302,14 @@ export class App {
     const newPath = parameters.path(hash, search).value
 
     if (newPath !== this.trackPageData.path) {
-      this.trackPageData.path = newPath
-      this.trackSinglePage(false)
+      this.trackSinglePage(false, newPath)
     }
   }
 
-  private trackSinglePage(first: boolean) {
+  private trackSinglePage(first: boolean, path: string) {
     if (!this.trackPageData) return
-    const { path, time } = this.trackPageData
-
+    const { time } = this.trackPageData
+    this.trackPageData.path = path
     const params: any = {
       path,
       referrer: parameters.referrer(),
