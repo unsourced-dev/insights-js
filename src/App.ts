@@ -1,6 +1,6 @@
 import unfetch from "unfetch"
 import * as parameters from "./parameters"
-import { isInBrowser } from "./utils"
+import { isInBrowser, isReferrerSameHost, getHost } from "./utils"
 
 /**
  * Additional options used when tracking events
@@ -29,7 +29,7 @@ function ignore() {}
 /**
  * A map of key/value pairs.
  */
-export interface StringMap<T> {
+interface StringMap<T> {
   [key: string]: T
 }
 
@@ -167,12 +167,6 @@ export interface TrackEventPayload {
  */
 export interface TrackPagesOptions {
   /**
-   * When `true`, tracks unique page views and the bounce rate in addition to total page views.
-   *
-   * `true` by default.
-   */
-  unique?: boolean
-  /**
    * `true` to track the hash portion of the URL.
    *
    * `false` by default.
@@ -195,12 +189,11 @@ export interface TrackPagesResult {
 }
 
 interface TrackPageData {
-  unique: boolean
   hash: boolean
   search: boolean
   result: TrackPagesResult
 
-  count: number
+  time: number
   path: string
 }
 
@@ -215,6 +208,7 @@ export class App {
 
   constructor(public projectId: string, public options: AppOptions = defaultOptions) {
     this.trackPageChange = this.trackPageChange.bind(this)
+    this.trackLastPageTimeSpent = this.trackLastPageTimeSpent.bind(this)
   }
 
   /**
@@ -252,15 +246,6 @@ export class App {
   /**
    * Tracks page views. This method checks if the URL changed every so often and tracks new pages accordingly.
    *
-   * **Important note on bounce rate and unique views:**
-   *
-   * This method does not store any cookie or local storage, it expects that you use a client-side router.
-   * e.g. `react-router`, `nextjs`'s router, etc...
-   * The bounce rate and unique views will not be accurate if you do not use a client-side router,
-   * in these cases, user `trackPages(false)` to disable tracking of the bounce rate and unique page views.
-   *
-   * By default, does not track the `location.hash` nor the `location.search`
-   *
    * @param options The options to use for the tracking
    *
    * @returns An object of the form `{ stop(): void }` to stop the tracking
@@ -277,13 +262,12 @@ export class App {
     const interval = setInterval(this.trackPageChange, 2000)
 
     // Calculate the data
-    const { unique = true, hash = false, search = false } = options || {}
+    const { hash = false, search = false } = options || {}
     this.trackPageData = {
-      unique,
       hash,
       search,
       path: parameters.path(hash, search).value,
-      count: 1,
+      time: Date.now(),
       result: {
         stop() {
           clearInterval(interval)
@@ -292,9 +276,22 @@ export class App {
     }
 
     // Track the first/current page view
-    this.trackSinglePage()
+    this.trackSinglePage(true)
+    ;(window as any).onbeforeunload(this.trackLastPageTimeSpent)
 
     return this.trackPageData.result
+  }
+
+  private getPreviousPage() {
+    const dataPath = this.trackPageData && this.trackPageData.path
+    if (dataPath) {
+      return dataPath
+    }
+    if (isReferrerSameHost()) {
+      return document.referrer.replace(getHost(), "")
+    }
+
+    return document.referrer
   }
 
   private trackPageChange() {
@@ -305,25 +302,48 @@ export class App {
 
     if (newPath !== this.trackPageData.path) {
       this.trackPageData.path = newPath
-      this.trackPageData.count++
-      this.trackSinglePage()
+      this.trackSinglePage(false)
     }
   }
 
-  private trackSinglePage() {
+  private trackSinglePage(first: boolean) {
     if (!this.trackPageData) return
-    const { unique, path, count } = this.trackPageData
+    const { path, time } = this.trackPageData
 
     const params: any = {
       path,
       referrer: parameters.referrer(),
       locale: parameters.locale(),
       screenType: parameters.screenType(),
-      unique: unique && count === 1 ? "Yes" : "No"
+      unique: first && !isReferrerSameHost() ? "Yes" : "No",
+      transitions: parameters.transition(this.getPreviousPage(), path)
     }
+
+    if (!first) {
+      const now = Date.now()
+      this.trackPageData.time = now
+      params.duration = parameters.durationInterval(now - time)
+    }
+
     this.track({
       id: "page-views",
       parameters: params
+    })
+  }
+
+  private trackLastPageTimeSpent() {
+    const time = this.trackPageData && this.trackPageData.time
+    if (!time) {
+      return
+    }
+
+    const now = Date.now()
+    this.track({
+      id: "page-views",
+      parameters: {
+        duration: parameters.durationInterval(now - time)
+      },
+      update: true
     })
   }
 }
