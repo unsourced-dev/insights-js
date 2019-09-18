@@ -1,14 +1,27 @@
-import { isInBrowser } from "./utils"
+import { isInBrowser, isReferrerSameHost } from "./utils"
 
 /**
- * Logs the default locale of the current user.
+ * Get the preferred browser locale, of the form: xx, xx-YY or falsy
+ */
+function getLocale() {
+  const locale = typeof navigator.languages !== "undefined" ? navigator.languages[0] : navigator.language
+
+  if (locale && locale.length === 5 && locale[2] === "-") {
+    return locale.substr(0, 3) + locale.substr(3).toLocaleUpperCase()
+  }
+  return locale
+}
+
+/**
+ * Track the default locale of the current user.
  */
 export function locale() {
   if (!isInBrowser()) {
     return { type: "locale", value: "<not-in-browser>" }
   }
-  const value = typeof navigator.languages !== "undefined" ? navigator.languages[0] : navigator.language
-  return { type: "locale", value: value || "<none>" }
+
+  const value = getLocale() || "<none>"
+  return { type: "locale", value }
 }
 
 function getScreenType() {
@@ -21,7 +34,7 @@ function getScreenType() {
 }
 
 /**
- * Logs the screen type of the current user, based on window size:
+ * Track the screen type of the current user, based on window size:
  *
  * - width <= 414: XS -> phone
  * - width <= 800: S -> tablet
@@ -41,13 +54,13 @@ function getHost() {
 }
 
 /**
- * Logs the referrer on the current page, or `<none>` if the page has no referrer.
+ * Track the referrer on the current page, or `<none>` if the page has no referrer.
  */
 export function referrer() {
   if (!isInBrowser()) {
     return { type: "referrer", value: "<not-in-browser>" }
   }
-  if ((document.referrer || "").startsWith(getHost())) {
+  if (isReferrerSameHost()) {
     return { type: "referrer", value: "<none>" }
   }
 
@@ -55,7 +68,7 @@ export function referrer() {
 }
 
 /**
- * Logs the current path within the application.
+ * Track the current path within the application.
  * By default, does not log the `location.hash` nor the `location.search`
  *
  * @param hash `true` to log the hash, `false` by default
@@ -79,4 +92,46 @@ export function path(hash: boolean = false, search: boolean = false) {
   }
 
   return { type: "path", value }
+}
+
+/**
+ * Track a transition between two values.
+ *
+ * @param previous The previous value
+ * @param next The next value
+ */
+export function transition(previous: string, next: string) {
+  return { type: "transition", value: previous + "  ->  " + next }
+}
+
+/**
+ * Track a duration at several intervals:
+ *
+ * - < 5 seconds
+ * - < 15 seconds
+ * - < 30 seconds
+ * - < 1 minute
+ * - < 5 minutes
+ * - \>= 5 minutes
+ *
+ * @param durationMs the duration to encode, in milliseconds
+ */
+export function durationInterval(durationMs: number) {
+  if (durationMs < 5000) {
+    return { type: "duration-interval", value: "< 5s" }
+  }
+  if (durationMs < 15000) {
+    return { type: "duration-interval", value: "< 15s" }
+  }
+  if (durationMs < 30000) {
+    return { type: "duration-interval", value: "< 30s" }
+  }
+  if (durationMs < 60000) {
+    return { type: "duration-interval", value: "< 1m" }
+  }
+  if (durationMs < 5 * 60000) {
+    return { type: "duration-interval", value: "< 5m" }
+  }
+
+  return { type: "duration-interval", value: "> 5m" }
 }
