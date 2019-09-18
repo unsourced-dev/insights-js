@@ -313,14 +313,14 @@ export class App {
     this.trackPageData.isOnFirstPage = first && !isReferrerSameHost()
     const { time, isOnFirstPage } = this.trackPageData
     const params: any = {
-      path,
-      referrer: parameters.referrer(),
-      locale: parameters.locale(),
-      screenType: parameters.screenType()
+      path
     }
 
     if (isOnFirstPage) {
       params.uniqueViews = path
+      params.referrer = parameters.referrer()
+      params.locale = parameters.locale()
+      params.screenType = parameters.screenType()
     }
 
     const previous = this.getPreviousPage(first)
