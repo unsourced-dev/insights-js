@@ -1,6 +1,6 @@
 {
   "name": "insights-js",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Javascript client for getinsights.io",
   "keywords": [],
   "main": "dist/insights-js.cjs.js",
