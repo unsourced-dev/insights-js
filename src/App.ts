@@ -283,9 +283,9 @@ export class App {
     return this.trackPageData.result
   }
 
-  private getPreviousPage() {
+  private getPreviousPage(first: boolean) {
     const dataPath = this.trackPageData && this.trackPageData.path
-    if (dataPath) {
+    if (!first && dataPath) {
       return dataPath
     }
     if (isReferrerSameHost()) {
@@ -309,14 +309,17 @@ export class App {
   private trackSinglePage(first: boolean, path: string) {
     if (!this.trackPageData) return
     const { time } = this.trackPageData
-    this.trackPageData.path = path
     const params: any = {
       path,
       referrer: parameters.referrer(),
       locale: parameters.locale(),
       screenType: parameters.screenType(),
-      unique: first && !isReferrerSameHost() ? "Yes" : "No",
-      transitions: parameters.transition(this.getPreviousPage(), path)
+      unique: first && !isReferrerSameHost() ? "Yes" : "No"
+    }
+
+    const previous = this.getPreviousPage(first)
+    if (previous && previous !== path) {
+      params.transitions = parameters.transition(previous, path)
     }
 
     if (!first) {
@@ -325,6 +328,7 @@ export class App {
       params.duration = parameters.durationInterval(now - time)
     }
 
+    this.trackPageData.path = path
     this.track({
       id: "page-views",
       parameters: params
