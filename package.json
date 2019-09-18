@@ -21,7 +21,7 @@
     "build": "rollup -c",
     "start": "rollup -c -w",
     "doc": "npm run docs",
-    "docs": "rimraf docs && typedoc --out docs/ . --excludeNotExported --exclude node_modules --tsConfig ./tsconfig.json --theme markdown --hideSources --entryPoint src/index.ts --hideGenerator"
+    "docs": "rimraf docs && typedoc src/index.ts"
   },
   "prettier": {
     "semi": false,
