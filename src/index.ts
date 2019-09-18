@@ -54,13 +54,6 @@ export function track(event: TrackEventPayload): void {
  * Tracks page views using the default app.
  * This method checks if the URL changed every so often and tracks new pages accordingly.
  *
- * **Important note on bounce rate and unique views:**
- *
- * This method does not store any cookie or local storage, it expects that you use a client-side router.
- * e.g. `react-router`, `nextjs`'s router, etc...
- * The bounce rate and unique views will not be accurate if you do not use a client-side router,
- * in these cases, user `trackPages(false)` to disable tracking of the bounce rate and unique page views.
- *
  * By default, does not track the `location.hash` nor the `location.search`.
  *
  * @param options The options to use for the tracking
