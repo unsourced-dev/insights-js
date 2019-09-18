@@ -358,7 +358,7 @@ export class App {
       params.bounces = isOnFirstPage ? "Yes" : "No"
     } else if (!nextUrl.startsWith("/") && !nextUrl.startsWith(getHost())) {
       // link outside of the app
-      params.transition = parameters.transition(path, nextUrl)
+      params.transitions = parameters.transition(path, nextUrl)
     }
 
     navigator.sendBeacon(
