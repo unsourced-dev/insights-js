@@ -112,7 +112,7 @@ export function transition(previous: string, next: string) {
  * - < 30 seconds
  * - < 1 minute
  * - < 5 minutes
- * - \>= 5 minutes
+ * - \> 5 minutes
  *
  * @param durationMs the duration to encode, in milliseconds
  */
