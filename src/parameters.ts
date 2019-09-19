@@ -49,10 +49,6 @@ export function screenType() {
   return { type: "screen-type", value: getScreenType() }
 }
 
-function getHost() {
-  return location.protocol + "//" + location.host
-}
-
 /**
  * Track the referrer on the current page, or `<none>` if the page has no referrer.
  */
