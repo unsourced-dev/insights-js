@@ -18,5 +18,5 @@ export function isReferrerSameHost(): boolean {
   const referrer = document.referrer || ""
   const host = getHost()
 
-  return referrer.startsWith(host)
+  return referrer.substr(0, host.length) === host
 }

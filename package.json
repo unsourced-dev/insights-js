@@ -27,10 +27,7 @@
     "semi": false,
     "printWidth": 120
   },
-  "dependencies": {
-    "isomorphic-unfetch": "3.0.0",
-    "unfetch": "4.1.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "12.7.4",
     "@types/node-fetch": "2.5.0",

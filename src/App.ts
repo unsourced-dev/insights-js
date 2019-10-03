@@ -1,4 +1,3 @@
-import unfetch from "unfetch"
 import * as parameters from "./parameters"
 import { isInBrowser, isReferrerSameHost, getHost } from "./utils"
 
@@ -23,8 +22,6 @@ export interface AppOptions {
  * The default options.
  */
 const defaultOptions: AppOptions = {}
-
-function ignore() {}
 
 /**
  * A map of key/value pairs.
@@ -215,10 +212,8 @@ export class App {
    * Track an occurence of the given event.
    *
    * @param event {TrackEventPayload} The event to track.
-   *
-   * @returns {Promise} a promise that resolves when the call to the API resolves.
    */
-  track(event: TrackEventPayload): Promise<void> {
+  track(event: TrackEventPayload) {
     if (this.options.disabled || !isInBrowser()) {
       return Promise.resolve()
     }
@@ -237,10 +232,10 @@ export class App {
     if (event.parameters) body.parameters = event.parameters
     if (event.update) body.update = true
 
-    return unfetch("https://getinsights.io/app/tics", {
-      method: "post",
-      body: JSON.stringify(body)
-    }).then(ignore)
+    // do not use fetch, for IE compatibility
+    const request = new XMLHttpRequest()
+    request.open("post", "https://getinsights.io/app/tics", true)
+    request.send(JSON.stringify(body))
   }
 
   /**
@@ -353,13 +348,23 @@ export class App {
     params.duration = parameters.durationInterval(Date.now() - time, path + " - ")
 
     const nextUrl: string = (document.activeElement && (document.activeElement as any).href) || ""
+    const host = getHost()
     if (!nextUrl) {
       // user closed the window
       params.bounces = isOnFirstPage ? "Yes" : "No"
-    } else if (!nextUrl.startsWith("/") && !nextUrl.startsWith(getHost())) {
+    } else if (nextUrl[0] !== "/" && nextUrl.substr(0, host.length) !== getHost()) {
       // link outside of the app
       params.transitions = parameters.transition(path, nextUrl)
     }
+
+    // polyfil for IE, this won't always work, but it's better than nothing.
+    navigator.sendBeacon =
+      navigator.sendBeacon ||
+      function(url: string, body: string) {
+        const request = new XMLHttpRequest()
+        request.open("post", url, false)
+        request.send(body)
+      }
 
     navigator.sendBeacon(
       "https://getinsights.io/app/tics",
