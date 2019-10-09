@@ -234,6 +234,7 @@ export class App {
 
     // do not use fetch, for IE compatibility
     const request = new XMLHttpRequest()
+    request.setRequestHeader("Content-Type", "application/json")
     request.open("post", "https://getinsights.io/app/tics", true)
     request.send(JSON.stringify(body))
   }
