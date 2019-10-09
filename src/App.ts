@@ -321,12 +321,10 @@ export class App {
     const previous = this.getPreviousPage(first)
     if (previous && previous !== path) {
       params.transitions = parameters.transition(previous, path)
-    }
 
-    if (!first) {
       const now = Date.now()
       this.trackPageData.time = now
-      params.duration = parameters.durationInterval(now - time, path + " - ")
+      params.duration = parameters.durationInterval(now - time, previous + " - ")
     }
 
     this.trackPageData.path = path
