@@ -1,5 +1,5 @@
 import * as parameters from "./parameters"
-import { isInBrowser, isReferrerSameHost, getHost } from "./utils"
+import { isInBrowser, isReferrerSameHost, getHost, isInIframe } from "./utils"
 
 /**
  * Additional options used when tracking events
@@ -287,6 +287,10 @@ export class App {
     }
     if (isReferrerSameHost()) {
       return document.referrer.replace(getHost(), "")
+    }
+
+    if (isInIframe()) {
+      return null
     }
 
     return document.referrer

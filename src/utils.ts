@@ -20,3 +20,11 @@ export function isReferrerSameHost(): boolean {
 
   return referrer.substr(0, host.length) === host
 }
+
+export function isInIframe() {
+  try {
+    return window.self !== window.top
+  } catch (e) {
+    return true
+  }
+}
