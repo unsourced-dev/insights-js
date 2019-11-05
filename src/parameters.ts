@@ -4,7 +4,14 @@ import { isInBrowser, isReferrerSameHost } from "./utils"
  * Get the preferred browser locale, of the form: xx, xx-YY or falsy
  */
 function getLocale() {
-  const locale = typeof navigator.languages !== "undefined" ? navigator.languages[0] : navigator.language
+  let locale = typeof navigator.languages !== "undefined" ? navigator.languages[0] : navigator.language
+
+  if (locale[0] === '"') {
+    locale = locale.substr(1)
+  }
+  if (locale.length > 0 && locale[locale.length - 1] === '"') {
+    locale = locale.substr(0, locale.length - 1)
+  }
 
   if (locale && locale.length === 5 && locale[2] === "-") {
     return locale.substr(0, 3) + locale.substr(3).toLocaleUpperCase()
