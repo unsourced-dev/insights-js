@@ -289,10 +289,6 @@ export class App {
       return document.referrer.replace(getHost(), "")
     }
 
-    if (isInIframe()) {
-      return null
-    }
-
     return document.referrer
   }
 
@@ -327,9 +323,11 @@ export class App {
     if (previous && previous !== path) {
       params.transitions = parameters.transition(previous, path)
 
-      const now = Date.now()
-      this.trackPageData.time = now
-      params.duration = parameters.durationInterval(now - time, previous + " - ")
+      if (!isOnFirstPage) {
+        const now = Date.now()
+        this.trackPageData.time = now
+        params.duration = parameters.durationInterval(now - time, previous + " - ")
+      }
     }
 
     this.trackPageData.path = path
