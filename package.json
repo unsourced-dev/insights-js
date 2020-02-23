@@ -6,7 +6,8 @@
   "main": "dist/insights-js.cjs.js",
   "module": "dist/insights-js.es5.js",
   "browser": "dist/insights-js.umd.js",
-  "typings": "dist/types/index.d.ts",
+  "esnext": "dist/esnext/index.js",
+  "typings": "dist/esnext/index.d.ts",
   "files": [
     "dist"
   ],
@@ -18,10 +19,11 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "prepublish": "npm run build",
-    "build": "rollup -c && tsc",
+    "build": "rollup -c && tsc -p tsconfig.esnext.json",
     "start": "rollup -c -w",
     "doc": "npm run docs",
-    "docs": "rimraf docs && typedoc src/index.ts"
+    "docs": "rimraf docs && typedoc src/index.ts",
+    "tsc": "tsc -p tsconfig.esnext.json"
   },
   "prettier": {
     "semi": false,

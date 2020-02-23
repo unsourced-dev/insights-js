@@ -17,7 +17,7 @@ export default [
     ],
     plugins: [
       // Compile TypeScript files
-      typescript({ useTsconfigDeclarationDir: true }),
+      typescript(),
       // Allow node_modules resolution, so you can use 'external' to control
       // which external modules to include in the bundle
       // https://github.com/rollup/rollup-plugin-node-resolve#usage
@@ -36,7 +36,7 @@ export default [
     ],
     plugins: [
       // Compile TypeScript files
-      typescript({ useTsconfigDeclarationDir: true }),
+      typescript(),
       // Allow node_modules resolution, so you can use 'external' to control
       // which external modules to include in the bundle
       // https://github.com/rollup/rollup-plugin-node-resolve#usage
