@@ -18,7 +18,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "prepublish": "npm run build",
-    "build": "rollup -c",
+    "build": "rollup -c && tsc",
     "start": "rollup -c -w",
     "doc": "npm run docs",
     "docs": "rimraf docs && typedoc src/index.ts"
@@ -29,19 +29,19 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "12.7.4",
-    "@types/node-fetch": "2.5.0",
-    "prettier": "1.18.2",
-    "rimraf": "3.0.0",
-    "rollup": "1.20.3",
+    "@types/node": "13.7.4",
+    "@types/node-fetch": "2.5.4",
+    "prettier": "1.19.1",
+    "rimraf": "3.0.2",
+    "rollup": "1.31.1",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-json": "4.0.0",
     "rollup-plugin-node-resolve": "5.2.0",
-    "rollup-plugin-sourcemaps": "0.4.2",
-    "rollup-plugin-typescript2": "0.24.0",
-    "rollup-plugin-uglify": "^6.0.3",
-    "typedoc": "^0.15.0",
-    "typedoc-plugin-markdown": "^2.1.11",
-    "typescript": "3.6.2"
+    "rollup-plugin-sourcemaps": "0.5.0",
+    "rollup-plugin-typescript2": "0.26.0",
+    "rollup-plugin-uglify": "6.0.4",
+    "typedoc": "0.16.10",
+    "typedoc-plugin-markdown": "2.2.16",
+    "typescript": "3.8.2"
   }
 }
