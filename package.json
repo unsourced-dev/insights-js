@@ -2,7 +2,9 @@
   "name": "insights-js",
   "version": "1.2.10",
   "description": "Javascript client for getinsights.io",
-  "keywords": [],
+  "keywords": [
+    "insights"
+  ],
   "main": "dist/insights-js.cjs.js",
   "module": "dist/insights-js.es5.js",
   "browser": "dist/insights-js.umd.js",
@@ -24,10 +26,6 @@
     "doc": "npm run docs",
     "docs": "rimraf docs && typedoc src/index.ts",
     "tsc": "tsc -p tsconfig.esnext.json"
-  },
-  "prettier": {
-    "semi": false,
-    "printWidth": 120
   },
   "dependencies": {},
   "devDependencies": {
