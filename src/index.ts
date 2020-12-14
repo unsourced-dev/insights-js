@@ -32,8 +32,8 @@ export let DEFAULT_APP: App | null = null
  * @returns The default app
  */
 export function init(projectId: string, options?: AppOptions): App {
-  if (!isInBrowser() || !!DEFAULT_APP) {
-    throw new Error("Already initialized!")
+  if (!isInBrowser() || DEFAULT_APP) {
+    return DEFAULT_APP as any
   }
   DEFAULT_APP = new App(projectId, options)
   return DEFAULT_APP
