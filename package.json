@@ -29,19 +29,19 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "13.13.2",
-    "@types/node-fetch": "2.5.6",
-    "prettier": "2.0.5",
+    "@types/node": "14.14.13",
+    "@types/node-fetch": "2.5.7",
+    "prettier": "2.2.1",
     "rimraf": "3.0.2",
-    "rollup": "2.7.2",
+    "rollup": "2.35.0",
     "rollup-plugin-commonjs": "10.1.0",
     "rollup-plugin-json": "4.0.0",
     "rollup-plugin-node-resolve": "5.2.0",
-    "rollup-plugin-sourcemaps": "0.5.0",
-    "rollup-plugin-typescript2": "0.27.0",
+    "rollup-plugin-sourcemaps": "0.6.3",
+    "rollup-plugin-typescript2": "0.29.0",
     "rollup-plugin-uglify": "6.0.4",
-    "typedoc": "0.17.4",
-    "typedoc-plugin-markdown": "2.2.17",
-    "typescript": "3.8.3"
+    "typedoc": "0.19.2",
+    "typedoc-plugin-markdown": "3.1.1",
+    "typescript": "4.1.3"
   }
 }
