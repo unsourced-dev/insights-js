@@ -1,8 +1,6 @@
-**[insights-js](../README.md)**
+[insights-js](../README.md) › [Globals](../globals.md) › ["index"](_index_.md)
 
-[Globals](../globals.md) › [&quot;index&quot;](_index_.md)
-
-# External module: "index"
+# Module: "index"
 
 ## Index
 
@@ -20,7 +18,7 @@
 
 ### `Let` DEFAULT_APP
 
-• **DEFAULT_APP**: *[App](../classes/_app_.app.md) | null* =  null
+• **DEFAULT_APP**: *[App](../classes/_app_.app.md) | null* = null
 
 The default application, or `null` if none.
 

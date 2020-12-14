@@ -1,8 +1,6 @@
-**[insights-js](../README.md)**
+[insights-js](../README.md) › [Globals](../globals.md) › ["parameters"](_parameters_.md)
 
-[Globals](../globals.md) › [&quot;parameters&quot;](_parameters_.md)
-
-# External module: "parameters"
+# Module: "parameters"
 
 ## Index
 
@@ -19,7 +17,7 @@
 
 ###  durationInterval
 
-▸ **durationInterval**(`durationMs`: number): *object*
+▸ **durationInterval**(`durationMs`: number, `prefix`: string): *object*
 
 Track a duration at several intervals:
 
@@ -32,11 +30,16 @@ Track a duration at several intervals:
 
 **Parameters:**
 
-Name | Type | Description |
------- | ------ | ------ |
-`durationMs` | number | the duration to encode, in milliseconds  |
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`durationMs` | number | - | the duration to encode, in milliseconds  |
+`prefix` | string | "" | - |
 
 **Returns:** *object*
+
+* **type**: *string* = "duration-interval"
+
+* **value**: *string* = prefix + "< 5s"
 
 ___
 
@@ -47,6 +50,10 @@ ___
 Track the default locale of the current user.
 
 **Returns:** *object*
+
+* **type**: *string* = "locale"
+
+* **value**: *string* = "<not-in-browser>"
 
 ___
 
@@ -66,6 +73,10 @@ Name | Type | Default | Description |
 
 **Returns:** *object*
 
+* **type**: *string* = "path"
+
+* **value**: *string* = "<not-in-browser>"
+
 ___
 
 ###  referrer
@@ -75,6 +86,10 @@ ___
 Track the referrer on the current page, or `<none>` if the page has no referrer.
 
 **Returns:** *object*
+
+* **type**: *string* = "referrer"
+
+* **value**: *string* = "<not-in-browser>"
 
 ___
 
@@ -92,6 +107,10 @@ Track the screen type of the current user, based on window size:
 
 **Returns:** *object*
 
+* **type**: *string* = "screen-type"
+
+* **value**: *string* = "<not-in-browser>"
+
 ___
 
 ###  transition
@@ -108,3 +127,7 @@ Name | Type | Description |
 `next` | string | The next value  |
 
 **Returns:** *object*
+
+* **type**: *string* = "transition"
+
+* **value**: *string* = previous + "  ->  " + next

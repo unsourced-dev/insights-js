@@ -1,6 +1,4 @@
-**[insights-js](../README.md)**
-
-[Globals](../globals.md) › [&quot;App&quot;](../modules/_app_.md) › [ParameterValue](_app_.parametervalue.md)
+[insights-js](../README.md) › [Globals](../globals.md) › ["App"](../modules/_app_.md) › [ParameterValue](_app_.parametervalue.md)
 
 # Interface: ParameterValue
 

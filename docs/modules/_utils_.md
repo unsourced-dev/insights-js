@@ -1,8 +1,6 @@
-**[insights-js](../README.md)**
+[insights-js](../README.md) › [Globals](../globals.md) › ["utils"](_utils_.md)
 
-[Globals](../globals.md) › [&quot;utils&quot;](_utils_.md)
-
-# External module: "utils"
+# Module: "utils"
 
 ## Index
 
@@ -10,6 +8,7 @@
 
 * [getHost](_utils_.md#gethost)
 * [isInBrowser](_utils_.md#isinbrowser)
+* [isInIframe](_utils_.md#isiniframe)
 * [isReferrerSameHost](_utils_.md#isreferrersamehost)
 
 ## Functions
@@ -29,6 +28,14 @@ ___
 ###  isInBrowser
 
 ▸ **isInBrowser**(): *boolean*
+
+**Returns:** *boolean*
+
+___
+
+###  isInIframe
+
+▸ **isInIframe**(): *boolean*
 
 **Returns:** *boolean*
 

@@ -1,6 +1,4 @@
-**[insights-js](../README.md)**
-
-[Globals](../globals.md) › [&quot;App&quot;](../modules/_app_.md) › [AppOptions](_app_.appoptions.md)
+[insights-js](../README.md) › [Globals](../globals.md) › ["App"](../modules/_app_.md) › [AppOptions](_app_.appoptions.md)
 
 # Interface: AppOptions
 
@@ -34,3 +32,5 @@ ___
 
 When true, the call to `track(event)` will never throw nor log any error.
 This flag should be set to `true` for production systems.
+
+**`deprecated`** No longer used by the server.

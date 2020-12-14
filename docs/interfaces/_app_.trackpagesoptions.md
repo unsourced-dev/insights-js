@@ -1,6 +1,4 @@
-**[insights-js](../README.md)**
-
-[Globals](../globals.md) › [&quot;App&quot;](../modules/_app_.md) › [TrackPagesOptions](_app_.trackpagesoptions.md)
+[insights-js](../README.md) › [Globals](../globals.md) › ["App"](../modules/_app_.md) › [TrackPagesOptions](_app_.trackpagesoptions.md)
 
 # Interface: TrackPagesOptions
 

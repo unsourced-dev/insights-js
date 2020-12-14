@@ -1,6 +1,4 @@
-**[insights-js](../README.md)**
-
-[Globals](../globals.md) › [&quot;App&quot;](../modules/_app_.md) › [App](_app_.app.md)
+[insights-js](../README.md) › [Globals](../globals.md) › ["App"](../modules/_app_.md) › [App](_app_.app.md)
 
 # Class: App
 
@@ -43,7 +41,7 @@ A class that contains a `projectId` and related configuration to track events pa
 Name | Type | Default |
 ------ | ------ | ------ |
 `projectId` | string | - |
-`options` | [AppOptions](../interfaces/_app_.appoptions.md) |  defaultOptions |
+`options` | [AppOptions](../interfaces/_app_.appoptions.md) | defaultOptions |
 
 **Returns:** *[App](_app_.app.md)*
 
@@ -63,7 +61,7 @@ ___
 
 ### `Private` trackPageData
 
-• **trackPageData**: *TrackPageData | null* =  null
+• **trackPageData**: *TrackPageData | null* = null
 
 ___
 
@@ -89,7 +87,7 @@ ___
 
 ###  track
 
-▸ **track**(`event`: [TrackEventPayload](../interfaces/_app_.trackeventpayload.md)): *Promise‹void›*
+▸ **track**(`event`: [TrackEventPayload](../interfaces/_app_.trackeventpayload.md)): *undefined | Promise‹void›*
 
 Track an occurence of the given event.
 
@@ -99,9 +97,7 @@ Name | Type | Description |
 ------ | ------ | ------ |
 `event` | [TrackEventPayload](../interfaces/_app_.trackeventpayload.md) | The event to track.  |
 
-**Returns:** *Promise‹void›*
-
-a promise that resolves when the call to the API resolves.
+**Returns:** *undefined | Promise‹void›*
 
 ___
 

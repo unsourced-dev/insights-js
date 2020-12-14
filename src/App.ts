@@ -1,5 +1,5 @@
 import * as parameters from "./parameters"
-import { isInBrowser, isReferrerSameHost, getHost, isInIframe } from "./utils"
+import { getHost, isInBrowser, isReferrerSameHost } from "./utils"
 
 /**
  * Additional options used when tracking events
@@ -8,6 +8,8 @@ export interface AppOptions {
   /**
    * When true, the call to `track(event)` will never throw nor log any error.
    * This flag should be set to `true` for production systems.
+   *
+   * @deprecated No longer used by the server.
    */
   ignoreErrors?: boolean
 
@@ -226,7 +228,6 @@ export class App {
     const body: any = {
       id: event.id,
       projectId: this.projectId,
-      ignoreErrors: this.options.ignoreErrors || false
     }
     if (event.remove) body.remove = true
     if (event.parameters) body.parameters = event.parameters
@@ -268,8 +269,8 @@ export class App {
       result: {
         stop() {
           clearInterval(interval)
-        }
-      }
+        },
+      },
     }
 
     // Track the first/current page view
@@ -309,7 +310,7 @@ export class App {
     this.trackPageData.isOnFirstPage = first && !isReferrerSameHost()
     const { time, isOnFirstPage } = this.trackPageData
     const params: any = {
-      path
+      path,
     }
 
     if (isOnFirstPage) {
@@ -333,7 +334,7 @@ export class App {
     this.trackPageData.path = path
     this.track({
       id: "page-views",
-      parameters: params
+      parameters: params,
     })
   }
 
@@ -361,7 +362,7 @@ export class App {
     // polyfil for IE, this won't always work, but it's better than nothing.
     navigator.sendBeacon =
       navigator.sendBeacon ||
-      function(url: string, body: string) {
+      function (url: string, body: string) {
         const request = new XMLHttpRequest()
         request.open("post", url, false)
         request.send(body)
@@ -373,8 +374,7 @@ export class App {
         id: "page-views",
         projectId: this.projectId,
         parameters: params,
-        ignoreErrors: this.options.ignoreErrors || false,
-        update: true
+        update: true,
       })
     )
   }

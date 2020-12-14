@@ -38,8 +38,8 @@ init("XkJsfa5KasGf9W_8")
 track({
   id: "user-subscribed",
   parameters: {
-    plan: "Startup"
-  }
+    plan: "Startup",
+  },
 })
 ```
 
@@ -59,8 +59,8 @@ track({
   track({
     id: "user-subscribed",
     parameters: {
-      plan: "Startup"
-    }
+      plan: "Startup",
+    },
   })
 </script>
 ```
@@ -76,8 +76,8 @@ track({
   id: "user-registered",
   parameters: {
     method: "google",
-    from: "top-link"
-  }
+    from: "top-link",
+  },
 })
 ```
 
@@ -97,8 +97,8 @@ track({
     // this will track the locale of the user, useful to know if we should translate our posts
     locale: parameters.locale(),
     // this will track the type of screen on which the user reads the post, useful for useability
-    screenSize: parameters.screenType()
-  }
+    screenSize: parameters.screenType(),
+  },
 })
 ```
 
@@ -127,17 +127,17 @@ e.g:
 track({
   id: "user-subscribed",
   parameters: {
-    plan: "Startup"
-  }
+    plan: "Startup",
+  },
 })
 
 // A user unsbubscribed.
 track({
   id: "user-subscribed",
   parameters: {
-    plan: "Startup"
+    plan: "Startup",
   },
-  remove: true
+  remove: true,
 })
 ```
 
@@ -184,8 +184,8 @@ app1.track({
   id: "user-registered",
   parameters: {
     method: "google",
-    from: "top-link"
-  }
+    from: "top-link",
+  },
 })
 
 // will show up in project 2's dashboard
@@ -195,8 +195,8 @@ app2.track({
     // this will track the locale of the user, useful to know if we should translate our posts
     locale: parameters.locale(),
     // this will track the type of screen on which the user reads the post, useful for useability
-    screenSize: parameters.screenType()
-  }
+    screenSize: parameters.screenType(),
+  },
 })
 ```
 
@@ -219,11 +219,6 @@ The projectId to track this event with, you can find this in the page of your pr
 `options?: AppOptions`
 _Optional_
 _Default value:_ `{}`
-
-`options.ignoreErrors: boolean`
-_Optional_
-_Default value:_ `false`
-When set to `true` any error that may occur when tracking events will be ignored. It is reccomended to set this flag to `true` on production.
 
 `options.disabled: boolean`
 _Optional_
@@ -289,16 +284,16 @@ import { track, parameters } from "insights-js"
 track({
   id: "user-signed-up",
   parameters: {
-    provider: "email"
-  }
+    provider: "email",
+  },
 })
 
 // user signed up with facebook
 track({
   id: "user-signed-up",
   parameters: {
-    provider: "facebook"
-  }
+    provider: "facebook",
+  },
 })
 
 // a product was sold
@@ -306,8 +301,8 @@ track({
   id: "product-sale",
   parameters: {
     product: product.name,
-    currency: customer.currency
-  }
+    currency: customer.currency,
+  },
 })
 
 // a page was opened
@@ -316,8 +311,8 @@ track({
   parameters: {
     path: parameters.path(),
     screenType: parameters.screenType(),
-    referrer: parameters.referrer()
-  }
+    referrer: parameters.referrer(),
+  },
 })
 ```
 

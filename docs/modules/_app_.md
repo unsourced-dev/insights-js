@@ -1,8 +1,6 @@
-**[insights-js](../README.md)**
+[insights-js](../README.md) › [Globals](../globals.md) › ["App"](_app_.md)
 
-[Globals](../globals.md) › [&quot;App&quot;](_app_.md)
-
-# External module: "App"
+# Module: "App"
 
 ## Index
 

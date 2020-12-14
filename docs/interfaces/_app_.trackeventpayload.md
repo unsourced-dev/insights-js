@@ -1,6 +1,4 @@
-**[insights-js](../README.md)**
-
-[Globals](../globals.md) › [&quot;App&quot;](../modules/_app_.md) › [TrackEventPayload](_app_.trackeventpayload.md)
+[insights-js](../README.md) › [Globals](../globals.md) › ["App"](../modules/_app_.md) › [TrackEventPayload](_app_.trackeventpayload.md)
 
 # Interface: TrackEventPayload
 
