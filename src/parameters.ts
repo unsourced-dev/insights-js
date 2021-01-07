@@ -138,3 +138,30 @@ export function durationInterval(durationMs: number, prefix: string = "") {
 
   return { type: "duration-interval", value: prefix + "> 5m" }
 }
+
+/**
+ * Track the operating system of the user, here are the most common values:
+ *
+ * - Windows
+ * - Mac OS X
+ * - Android
+ * - Linux
+ * - iOS
+ */
+export function os() {
+  return { type: "os" }
+}
+
+/**
+ * Track the browser of the user, here are the most common values:
+ *
+ * - Chrome
+ * - Firefox
+ * - Safari
+ * - Mobile Chrome
+ * - Mobile Firefox
+ * - Mobile Safari
+ */
+export function browser() {
+  return { type: "browser" }
+}
