@@ -1,4 +1,6 @@
-[insights-js](README.md) › [Globals](globals.md)
+**[insights-js](README.md)**
+
+> Globals
 
 # insights-js
 

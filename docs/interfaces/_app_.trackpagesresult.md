@@ -1,4 +1,6 @@
-[insights-js](../README.md) › [Globals](../globals.md) › ["App"](../modules/_app_.md) › [TrackPagesResult](_app_.trackpagesresult.md)
+**[insights-js](../README.md)**
+
+> [Globals](../globals.md) / ["App"](../modules/_app_.md) / TrackPagesResult
 
 # Interface: TrackPagesResult
 
@@ -16,10 +18,10 @@ The object returned by `App.trackPages()`, used to stop tracking pages.
 
 ## Methods
 
-###  stop
+### stop
 
-▸ **stop**(): *void*
+▸ **stop**(): void
 
 Stops the tracking of pages.
 
-**Returns:** *void*
+**Returns:** void

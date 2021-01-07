@@ -1,4 +1,6 @@
-[insights-js](../README.md) › [Globals](../globals.md) › ["App"](../modules/_app_.md) › [TrackEventPayload](_app_.trackeventpayload.md)
+**[insights-js](../README.md)**
+
+> [Globals](../globals.md) / ["App"](../modules/_app_.md) / TrackEventPayload
 
 # Interface: TrackEventPayload
 
@@ -13,16 +15,16 @@ The payload to call
 ### Properties
 
 * [id](_app_.trackeventpayload.md#id)
-* [parameters](_app_.trackeventpayload.md#optional-parameters)
-* [remove](_app_.trackeventpayload.md#optional-remove)
-* [unique](_app_.trackeventpayload.md#optional-unique)
-* [update](_app_.trackeventpayload.md#optional-update)
+* [parameters](_app_.trackeventpayload.md#parameters)
+* [remove](_app_.trackeventpayload.md#remove)
+* [unique](_app_.trackeventpayload.md#unique)
+* [update](_app_.trackeventpayload.md#update)
 
 ## Properties
 
-###  id
+### id
 
-• **id**: *string*
+•  **id**: string
 
 A unique identifier for this event.
 This should be formatted as `pascal-case`.
@@ -31,9 +33,9 @@ This should be formatted as `pascal-case`.
 
 ___
 
-### `Optional` parameters
+### parameters
 
-• **parameters**? : *StringMap‹string | [ParameterValue](_app_.parametervalue.md)›*
+• `Optional` **parameters**: StringMap<string \| [ParameterValue](_app_.parametervalue.md)\>
 
 The parameters to log along this event.
 Each key in the map is the parameter name, and the value it's value.
@@ -82,9 +84,9 @@ track({
 
 ___
 
-### `Optional` remove
+### remove
 
-• **remove**? : *undefined | false | true*
+• `Optional` **remove**: undefined \| false \| true
 
 Certain events last through time and may be undone or cancelled after they have been logged.
 For example, when tracking subscription to services or people.
@@ -122,9 +124,9 @@ Useful to "cancel" a parameter value.
 
 ___
 
-### `Optional` unique
+### unique
 
-• **unique**? : *undefined | false | true*
+• `Optional` **unique**: undefined \| false \| true
 
 When true, check if a similar event (i.e. same id & same parameters),
 has already been logged **with the unique flag** in this session.
@@ -133,9 +135,9 @@ If a similar event has already been logged, it skips it.
 
 ___
 
-### `Optional` update
+### update
 
-• **update**? : *undefined | false | true*
+• `Optional` **update**: undefined \| false \| true
 
 When `true`, the count of an event is not updated, only parameter counts.
 This can be used to modify the value of parameters.

@@ -1,4 +1,6 @@
-[insights-js](../README.md) › [Globals](../globals.md) › ["utils"](_utils_.md)
+**[insights-js](../README.md)**
+
+> [Globals](../globals.md) / "utils"
 
 # Module: "utils"
 
@@ -13,36 +15,36 @@
 
 ## Functions
 
-###  getHost
+### getHost
 
-▸ **getHost**(): *string*
+▸ **getHost**(): string
 
 Get the current host, including the protocol, origin and port (if any).
 
 Does **not** end with a trailing "/".
 
-**Returns:** *string*
+**Returns:** string
 
 ___
 
-###  isInBrowser
+### isInBrowser
 
-▸ **isInBrowser**(): *boolean*
+▸ **isInBrowser**(): boolean
 
-**Returns:** *boolean*
-
-___
-
-###  isInIframe
-
-▸ **isInIframe**(): *boolean*
-
-**Returns:** *boolean*
+**Returns:** boolean
 
 ___
 
-###  isReferrerSameHost
+### isInIframe
 
-▸ **isReferrerSameHost**(): *boolean*
+▸ **isInIframe**(): boolean
 
-**Returns:** *boolean*
+**Returns:** boolean
+
+___
+
+### isReferrerSameHost
+
+▸ **isReferrerSameHost**(): boolean
+
+**Returns:** boolean

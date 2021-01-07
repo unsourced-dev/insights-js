@@ -1,4 +1,6 @@
-[insights-js](../README.md) › [Globals](../globals.md) › ["App"](_app_.md)
+**[insights-js](../README.md)**
+
+> [Globals](../globals.md) / "App"
 
 # Module: "App"
 

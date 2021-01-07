@@ -1,4 +1,6 @@
-[insights-js](../README.md) › [Globals](../globals.md) › ["App"](../modules/_app_.md) › [App](_app_.app.md)
+**[insights-js](../README.md)**
+
+> [Globals](../globals.md) / ["App"](../modules/_app_.md) / App
 
 # Class: App
 
@@ -18,132 +20,132 @@ A class that contains a `projectId` and related configuration to track events pa
 
 * [options](_app_.app.md#options)
 * [projectId](_app_.app.md#projectid)
-* [trackPageData](_app_.app.md#private-trackpagedata)
-* [uniques](_app_.app.md#private-uniques)
+* [trackPageData](_app_.app.md#trackpagedata)
+* [uniques](_app_.app.md#uniques)
 
 ### Methods
 
-* [getPreviousPage](_app_.app.md#private-getpreviouspage)
+* [getPreviousPage](_app_.app.md#getpreviouspage)
 * [track](_app_.app.md#track)
-* [trackLastPageTimeSpent](_app_.app.md#private-tracklastpagetimespent)
-* [trackPageChange](_app_.app.md#private-trackpagechange)
+* [trackLastPageTimeSpent](_app_.app.md#tracklastpagetimespent)
+* [trackPageChange](_app_.app.md#trackpagechange)
 * [trackPages](_app_.app.md#trackpages)
-* [trackSinglePage](_app_.app.md#private-tracksinglepage)
+* [trackSinglePage](_app_.app.md#tracksinglepage)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new App**(`projectId`: string, `options`: [AppOptions](../interfaces/_app_.appoptions.md)): *[App](_app_.app.md)*
+\+ **new App**(`projectId`: string, `options?`: [AppOptions](../interfaces/_app_.appoptions.md)): [App](_app_.app.md)
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default |
+Name | Type | Default value |
 ------ | ------ | ------ |
 `projectId` | string | - |
 `options` | [AppOptions](../interfaces/_app_.appoptions.md) | defaultOptions |
 
-**Returns:** *[App](_app_.app.md)*
+**Returns:** [App](_app_.app.md)
 
 ## Properties
 
-###  options
+### options
 
-• **options**: *[AppOptions](../interfaces/_app_.appoptions.md)*
-
-___
-
-###  projectId
-
-• **projectId**: *string*
+•  **options**: [AppOptions](../interfaces/_app_.appoptions.md)
 
 ___
 
-### `Private` trackPageData
+### projectId
 
-• **trackPageData**: *TrackPageData | null* = null
+•  **projectId**: string
 
 ___
 
-### `Private` uniques
+### trackPageData
 
-• **uniques**: *StringMap‹boolean›*
+• `Private` **trackPageData**: TrackPageData \| null = null
+
+___
+
+### uniques
+
+• `Private` **uniques**: StringMap<boolean\>
 
 ## Methods
 
-### `Private` getPreviousPage
+### getPreviousPage
 
-▸ **getPreviousPage**(`first`: boolean): *string*
+▸ `Private`**getPreviousPage**(`first`: boolean): string
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `first` | boolean |
 
-**Returns:** *string*
+**Returns:** string
 
 ___
 
-###  track
+### track
 
-▸ **track**(`event`: [TrackEventPayload](../interfaces/_app_.trackeventpayload.md)): *undefined | Promise‹void›*
+▸ **track**(`event`: [TrackEventPayload](../interfaces/_app_.trackeventpayload.md)): undefined \| Promise<void\>
 
 Track an occurence of the given event.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `event` | [TrackEventPayload](../interfaces/_app_.trackeventpayload.md) | The event to track.  |
 
-**Returns:** *undefined | Promise‹void›*
+**Returns:** undefined \| Promise<void\>
 
 ___
 
-### `Private` trackLastPageTimeSpent
+### trackLastPageTimeSpent
 
-▸ **trackLastPageTimeSpent**(): *void*
+▸ `Private`**trackLastPageTimeSpent**(): void
 
-**Returns:** *void*
-
-___
-
-### `Private` trackPageChange
-
-▸ **trackPageChange**(): *void*
-
-**Returns:** *void*
+**Returns:** void
 
 ___
 
-###  trackPages
+### trackPageChange
 
-▸ **trackPages**(`options?`: [TrackPagesOptions](../interfaces/_app_.trackpagesoptions.md)): *[TrackPagesResult](../interfaces/_app_.trackpagesresult.md)*
+▸ `Private`**trackPageChange**(): void
+
+**Returns:** void
+
+___
+
+### trackPages
+
+▸ **trackPages**(`options?`: [TrackPagesOptions](../interfaces/_app_.trackpagesoptions.md)): [TrackPagesResult](../interfaces/_app_.trackpagesresult.md)
 
 Tracks page views. This method checks if the URL changed every so often and tracks new pages accordingly.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `options?` | [TrackPagesOptions](../interfaces/_app_.trackpagesoptions.md) | The options to use for the tracking  |
 
-**Returns:** *[TrackPagesResult](../interfaces/_app_.trackpagesresult.md)*
+**Returns:** [TrackPagesResult](../interfaces/_app_.trackpagesresult.md)
 
 An object of the form `{ stop(): void }` to stop the tracking
 
 ___
 
-### `Private` trackSinglePage
+### trackSinglePage
 
-▸ **trackSinglePage**(`first`: boolean, `path`: string): *void*
+▸ `Private`**trackSinglePage**(`first`: boolean, `path`: string): void
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `first` | boolean |
 `path` | string |
 
-**Returns:** *void*
+**Returns:** void

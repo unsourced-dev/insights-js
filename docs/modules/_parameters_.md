@@ -1,4 +1,6 @@
-[insights-js](../README.md) › [Globals](../globals.md) › ["parameters"](_parameters_.md)
+**[insights-js](../README.md)**
+
+> [Globals](../globals.md) / "parameters"
 
 # Module: "parameters"
 
@@ -6,8 +8,10 @@
 
 ### Functions
 
+* [browser](_parameters_.md#browser)
 * [durationInterval](_parameters_.md#durationinterval)
 * [locale](_parameters_.md#locale)
+* [os](_parameters_.md#os)
 * [path](_parameters_.md#path)
 * [referrer](_parameters_.md#referrer)
 * [screenType](_parameters_.md#screentype)
@@ -15,9 +19,30 @@
 
 ## Functions
 
-###  durationInterval
+### browser
 
-▸ **durationInterval**(`durationMs`: number, `prefix`: string): *object*
+▸ **browser**(): object
+
+Track the browser of the user, here are the most common values:
+
+- Chrome
+- Firefox
+- Safari
+- Mobile Chrome
+- Mobile Firefox
+- Mobile Safari
+
+**Returns:** object
+
+Name | Type |
+------ | ------ |
+`type` | string |
+
+___
+
+### durationInterval
+
+▸ **durationInterval**(`durationMs`: number, `prefix?`: string): object
 
 Track a duration at several intervals:
 
@@ -28,74 +53,98 @@ Track a duration at several intervals:
 - < 5 minutes
 - \> 5 minutes
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default | Description |
+Name | Type | Default value | Description |
 ------ | ------ | ------ | ------ |
 `durationMs` | number | - | the duration to encode, in milliseconds  |
 `prefix` | string | "" | - |
 
-**Returns:** *object*
+**Returns:** object
 
-* **type**: *string* = "duration-interval"
-
-* **value**: *string* = prefix + "< 5s"
+Name | Type |
+------ | ------ |
+`type` | string |
+`value` | string |
 
 ___
 
-###  locale
+### locale
 
-▸ **locale**(): *object*
+▸ **locale**(): object
 
 Track the default locale of the current user.
 
-**Returns:** *object*
+**Returns:** object
 
-* **type**: *string* = "locale"
-
-* **value**: *string* = "<not-in-browser>"
+Name | Type |
+------ | ------ |
+`type` | string |
+`value` | string |
 
 ___
 
-###  path
+### os
 
-▸ **path**(`hash`: boolean, `search`: boolean): *object*
+▸ **os**(): object
+
+Track the operating system of the user, here are the most common values:
+
+- Windows
+- Mac OS X
+- Android
+- Linux
+- iOS
+
+**Returns:** object
+
+Name | Type |
+------ | ------ |
+`type` | string |
+
+___
+
+### path
+
+▸ **path**(`hash?`: boolean, `search?`: boolean): object
 
 Track the current path within the application.
 By default, does not log the `location.hash` nor the `location.search`
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default | Description |
+Name | Type | Default value | Description |
 ------ | ------ | ------ | ------ |
 `hash` | boolean | false | `true` to log the hash, `false` by default |
 `search` | boolean | false | `true` to log the hash, `false` by default  |
 
-**Returns:** *object*
+**Returns:** object
 
-* **type**: *string* = "path"
-
-* **value**: *string* = "<not-in-browser>"
+Name | Type |
+------ | ------ |
+`type` | string |
+`value` | string |
 
 ___
 
-###  referrer
+### referrer
 
-▸ **referrer**(): *object*
+▸ **referrer**(): object
 
 Track the referrer on the current page, or `<none>` if the page has no referrer.
 
-**Returns:** *object*
+**Returns:** object
 
-* **type**: *string* = "referrer"
-
-* **value**: *string* = "<not-in-browser>"
+Name | Type |
+------ | ------ |
+`type` | string |
+`value` | string |
 
 ___
 
-###  screenType
+### screenType
 
-▸ **screenType**(): *object*
+▸ **screenType**(): object
 
 Track the screen type of the current user, based on window size:
 
@@ -105,29 +154,31 @@ Track the screen type of the current user, based on window size:
 - width <= 1600: L -> large laptop
 - width > 1440: XL -> large desktop
 
-**Returns:** *object*
+**Returns:** object
 
-* **type**: *string* = "screen-type"
-
-* **value**: *string* = "<not-in-browser>"
+Name | Type |
+------ | ------ |
+`type` | string |
+`value` | string |
 
 ___
 
-###  transition
+### transition
 
-▸ **transition**(`previous`: string, `next`: string): *object*
+▸ **transition**(`previous`: string, `next`: string): object
 
 Track a transition between two values.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `previous` | string | The previous value |
 `next` | string | The next value  |
 
-**Returns:** *object*
+**Returns:** object
 
-* **type**: *string* = "transition"
-
-* **value**: *string* = previous + "  ->  " + next
+Name | Type |
+------ | ------ |
+`type` | string |
+`value` | string |
