@@ -1,0 +1,14 @@
+{
+  "name": "insights-js-playground",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "http-server -p 3000"
+  },
+  "dependencies": {
+    "insights-js": "file:.."
+  },
+  "devDependencies": {
+    "http-server": "0.12.3"
+  }
+}

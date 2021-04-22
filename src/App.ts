@@ -198,31 +198,31 @@ interface TrackPageData {
 
 // See https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
 function addOnPageClose(handler: () => any) {
-  let hidden: string | undefined = undefined
-  let visibilityChange: string | undefined = undefined
-  const doc = document as any
-  if (typeof doc.hidden !== "undefined") {
-    // Opera 12.10 and Firefox 18 and later support
-    hidden = "hidden"
-    visibilityChange = "visibilitychange"
-  } else if (typeof doc.msHidden !== "undefined") {
-    hidden = "msHidden"
-    visibilityChange = "msvisibilitychange"
-  } else if (typeof doc.webkitHidden !== "undefined") {
-    hidden = "webkitHidden"
-    visibilityChange = "webkitvisibilitychange"
-  }
+  // let hidden: string | undefined = undefined
+  // let visibilityChange: string | undefined = undefined
+  // const doc = document as any
+  // if (typeof doc.hidden !== "undefined") {
+  //   // Opera 12.10 and Firefox 18 and later support
+  //   hidden = "hidden"
+  //   visibilityChange = "visibilitychange"
+  // } else if (typeof doc.msHidden !== "undefined") {
+  //   hidden = "msHidden"
+  //   visibilityChange = "msvisibilitychange"
+  // } else if (typeof doc.webkitHidden !== "undefined") {
+  //   hidden = "webkitHidden"
+  //   visibilityChange = "webkitvisibilitychange"
+  // }
 
-  if (hidden) {
-    doc.addEventListener(visibilityChange, () => {
-      if (hidden && doc[hidden]) handler()
-    })
-  } else if ("onpagehide" in window) {
-    // See https://stackoverflow.com/questions/6906146/how-to-detect-browser-support-for-pageshow-and-pagehide
-    window.addEventListener("pagehide", handler)
-  } else {
-    window.addEventListener("unload", handler)
-  }
+  // if (hidden) {
+  //   doc.addEventListener(visibilityChange, () => {
+  //     if (hidden && doc[hidden]) handler()
+  //   })
+  // } else if ("onpagehide" in window) {
+  //   // See https://stackoverflow.com/questions/6906146/how-to-detect-browser-support-for-pageshow-and-pagehide
+  //   window.addEventListener("pagehide", handler)
+  // } else {
+  // }
+  window.addEventListener("unload", handler)
 }
 
 /**

@@ -25,9 +25,9 @@
     "start": "rollup -c -w",
     "doc": "npm run docs",
     "docs": "rimraf docs && typedoc src/index.ts",
-    "tsc": "tsc -p tsconfig.esnext.json"
+    "tsc": "tsc -p tsconfig.esnext.json",
+    "playground": "npm run build && cp dist/insights-js.umd.js playground/public/insights.js && cd playground && npm start"
   },
-  "dependencies": {},
   "devDependencies": {
     "@types/node": "14.14.13",
     "@types/node-fetch": "2.5.7",
